@@ -7,7 +7,8 @@ using SquidLabs.Tentacles.Infrastructure.DataStore.AWS.Options;
 
 namespace SquidLabs.Tentacles.Infrastructure.DataStore.AWS;
 
-public class DynamoStore<TKey, TEntity> : IDataStore<TKey, TEntity>
+public class DynamoStore<TIdentifier, TEntry> : IDataStore<TIdentifier, TEntry> 
+    where TEntry : IDataEntry
 {
     private readonly AmazonDynamoDBClient _client;
     private readonly DynamoStoreOptions _dynamoStoreOptions;
@@ -23,7 +24,7 @@ public class DynamoStore<TKey, TEntity> : IDataStore<TKey, TEntity>
         _client = new AmazonDynamoDBClient(_secretOptions.AccessKey, _secretOptions.SecretKey);
     }
 
-    public async Task WriteAsync(TKey identifier, TEntity entity, CancellationToken cancellationToken)
+    public async Task WriteAsync(TIdentifier id, TEntry entity, CancellationToken cancellationToken)
     {
         var table = Table.LoadTable(_client, _tableName);
         var json = JsonSerializer.Serialize(entity);
@@ -31,16 +32,16 @@ public class DynamoStore<TKey, TEntity> : IDataStore<TKey, TEntity>
         await table.PutItemAsync(doc, cancellationToken);
     }
 
-    public async Task<TEntity> ReadAsync(TKey identifier, CancellationToken cancellationToken)
+    public async Task<TEntry> ReadAsync(TIdentifier id, CancellationToken cancellationToken)
     {
         var table = Table.LoadTable(_client, _tableName);
         var response =
-            await table.GetItemAsync(new Dictionary<string, DynamoDBEntry> { { "Id", identifier.ToString() } },
+            await table.GetItemAsync(new Dictionary<string, DynamoDBEntry> { { "Id", id.ToString() } },
                 cancellationToken);
-        return JsonSerializer.Deserialize<TEntity>(response.ToJson());
+        return JsonSerializer.Deserialize<TEntry>(response.ToJson());
     }
 
-    public async Task UpdateAsync(TKey identifier, TEntity entity, CancellationToken cancellationToken)
+    public async Task UpdateAsync(TIdentifier id, TEntry entity, CancellationToken cancellationToken)
     {
         var table = Table.LoadTable(_client, _tableName);
         var json = JsonSerializer.Serialize(entity);
@@ -48,10 +49,10 @@ public class DynamoStore<TKey, TEntity> : IDataStore<TKey, TEntity>
         await table.UpdateItemAsync(doc, cancellationToken);
     }
 
-    public async Task DeleteAsync(TKey identifier, CancellationToken cancellationToken)
+    public async Task DeleteAsync(TIdentifier id, CancellationToken cancellationToken)
     {
         var table = Table.LoadTable(_client, _tableName);
-        await table.DeleteItemAsync(new Dictionary<string, DynamoDBEntry> { { "Id", identifier.ToString() } },
+        await table.DeleteItemAsync(new Dictionary<string, DynamoDBEntry> { { "Id", id.ToString() } },
             cancellationToken);
     }
 }

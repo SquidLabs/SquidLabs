@@ -3,15 +3,15 @@ using Microsoft.Extensions.Logging;
 
 namespace SquidLabs.Platform.Console;
 
-public abstract class ConsoleHostedService : IHostedService
+public abstract class BaseConsoleHostedService : IHostedService
 {
     private readonly IHostApplicationLifetime _appLifetime;
     private readonly ILogger _logger;
     private int? _exitCode;
     private Task _process;
 
-    public ConsoleHostedService(
-        ILogger<ConsoleHostedService> logger,
+    public BaseConsoleHostedService(
+        ILogger<BaseConsoleHostedService> logger,
         IHostApplicationLifetime appLifetime)
     {
         _logger = logger;
@@ -26,22 +26,21 @@ public abstract class ConsoleHostedService : IHostedService
 
         _appLifetime.ApplicationStarted.Register(async () =>
         {
-            _logger.LogDebug("SquidLabs.Tentacles.Application has started");
+            _logger.LogDebug("Application started");
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-
 
             try
             {
                 _process = Process(_cancellationTokenSource.Token);
                 await _process;
             }
-            catch (TaskCanceledException)
+            catch (TaskCanceledException ex)
             {
-                // This means the application is shutting down, so just swallow this exception
+                _logger.LogError(ex, "The Task was canceled while still running. Waiting for it to return.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Unhandled exception!");
+                _logger.LogError(ex, "Unhandled Exception");
                 _exitCode = 1;
             }
             finally
@@ -53,7 +52,7 @@ public abstract class ConsoleHostedService : IHostedService
 
         _appLifetime.ApplicationStopping.Register(() =>
         {
-            _logger.LogDebug("SquidLabs.Tentacles.Application is stopping");
+            _logger.LogDebug("Application is stopping");
             _cancellationTokenSource?.Cancel();
         });
     }
@@ -61,9 +60,7 @@ public abstract class ConsoleHostedService : IHostedService
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         if (_process != null) await _process;
-        _logger.LogDebug($"Exiting with return code: {_exitCode}");
-
-        // Exit code may be null if the user cancelled via Ctrl+C/SIGTERM
+        _logger.LogDebug("Stopped Application with exit code", _exitCode);
         Environment.ExitCode = _exitCode.GetValueOrDefault(-1);
     }
 

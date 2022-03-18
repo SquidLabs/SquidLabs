@@ -1,8 +1,9 @@
 using System;
+using SquidLabs.Tentacles.Infrastructure.DataStore.Abstractions;
 
 namespace SquidLabs.Tentacles.Infrastructure.Tests;
 
-public class TestEntity
+public class TestEntry : IDataEntry
 {
     public Guid Id { get; set; }
     public string FirstName { get; set; }

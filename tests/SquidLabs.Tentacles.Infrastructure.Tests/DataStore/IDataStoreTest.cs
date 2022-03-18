@@ -10,8 +10,8 @@ public class IDataStoreTest
     [Test]
     public async Task ShouldWriteAndReadToDataStore()
     {
-        var dataStore = new TestCacheDataStore<Guid, TestEntity>();
-        var ackbar = new TestEntity
+        var dataStore = new TestCacheDataStore<Guid, TestEntry>();
+        var ackbar = new TestEntry
             { Id = Guid.NewGuid(), FirstName = "Gial", LastName = "Ackbar", Phrase = "It's a trap!" };
         await dataStore.WriteAsync(ackbar.Id, ackbar);
         var ackbarCopy = await dataStore.ReadAsync(ackbar.Id);
@@ -24,8 +24,8 @@ public class IDataStoreTest
     [Test]
     public async Task ShouldWriteAndUpdateToDataStore()
     {
-        var dataStore = new TestCacheDataStore<Guid, TestEntity>();
-        var ackbar = new TestEntity
+        var dataStore = new TestCacheDataStore<Guid, TestEntry>();
+        var ackbar = new TestEntry
             { Id = Guid.NewGuid(), FirstName = "Gial", LastName = "Ackbar", Phrase = "It's a trap!" };
         await dataStore.WriteAsync(ackbar.Id, ackbar);
         ackbar.Phrase = "Torpedoes inbound. It's been an honor serving with you all.";
@@ -40,8 +40,8 @@ public class IDataStoreTest
     [Test]
     public async Task ShouldDeleteFromDataStore()
     {
-        var dataStore = new TestCacheDataStore<Guid, TestEntity>();
-        var ackbar = new TestEntity
+        var dataStore = new TestCacheDataStore<Guid, TestEntry>();
+        var ackbar = new TestEntry
             { Id = Guid.NewGuid(), FirstName = "Gial", LastName = "Ackbar", Phrase = "It's a trap!" };
         await dataStore.WriteAsync(ackbar.Id, ackbar);
         await dataStore.DeleteAsync(ackbar.Id);
@@ -52,8 +52,8 @@ public class IDataStoreTest
     [Test]
     public async Task ShouldStopOperationWithCancellationTokenDataStore()
     {
-        var dataStore = new TestCacheDataStore<Guid, TestEntity>();
-        var ackbar = new TestEntity
+        var dataStore = new TestCacheDataStore<Guid, TestEntry>();
+        var ackbar = new TestEntry
             { Id = Guid.NewGuid(), FirstName = "Gial", LastName = "Ackbar", Phrase = "It's a trap!" };
         var cancellationTokenSource = new CancellationTokenSource();
 

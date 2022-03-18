@@ -10,8 +10,8 @@ public class ISearchableDataStoreTest
     [Test]
     public async Task ShouldBeAbleToSearchISearchableDataStore()
     {
-        var dataStore = new TestSearchDataStore<Guid, TestEntity, TestSearchCriteria>();
-        var ackbar = new TestEntity
+        var dataStore = new TestSearchDataStore<Guid, TestEntry, TestSearchCriteria>();
+        var ackbar = new TestEntry
             { Id = Guid.NewGuid(), FirstName = "Gial", LastName = "Ackbar", Phrase = "It's a trap!" };
         await dataStore.WriteAsync(ackbar.Id, ackbar);
         var response = await dataStore.SearchAsync(new TestSearchCriteria { LastName = "ackbar" });

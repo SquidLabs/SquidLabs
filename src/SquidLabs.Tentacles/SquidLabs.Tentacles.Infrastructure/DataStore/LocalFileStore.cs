@@ -4,7 +4,7 @@ namespace SquidLabs.Tentacles.Infrastructure.DataStore;
 
 /// <summary>
 /// </summary>
-public class LocalFileStore : IDataStore<string, Stream>
+public class LocalFileStore : IFileStore<string, Stream>
 {
     /// <summary>
     /// </summary>

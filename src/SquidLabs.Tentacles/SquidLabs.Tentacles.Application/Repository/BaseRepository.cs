@@ -7,17 +7,15 @@ namespace SquidLabs.Tentacles.Application.Repository;
 public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainObject, TKey>
     where TDomainObject : class, IDomainObject<TKey>
 {
-    private IDataStore<TKey, TDomainObject> _dataStore;
+    private IDataStore<TKey, IDataEntry> _dataStore;
 
     // TODO: need something more advanced look at automapper and figure something out that is clean.
     // TODO: Factory to generate a mapper?
     // TODO: Retry Policy
     // TODO: Locking
     // TODO: Versioning
-    private IMapper<TKey, TDomainObject,> _mapper;
+    private IMapper<TKey, TDomainObject, IDataEntry> _mapper;
     
-    //
-
     public async Task<TDomainObject> GetAsync(TKey id, CancellationToken cancellationToken = default(CancellationToken))
     {
         var response = await _dataStore.ReadAsync(id, cancellationToken).ConfigureAwait(false);

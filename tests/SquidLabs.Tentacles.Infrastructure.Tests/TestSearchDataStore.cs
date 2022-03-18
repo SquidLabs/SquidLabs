@@ -9,36 +9,36 @@ using SquidLabs.Tentacles.Infrastructure.DataStore.Abstractions;
 namespace SquidLabs.Tentacles.Infrastructure.Tests;
 
 public class
-    TestSearchDataStore<TIdentifier, TEntity, TSearchCriteria> : ISearchableDataStore<TIdentifier, TEntity,
+    TestSearchDataStore<TIdentifier, TEntry, TSearchCriteria> : ISearchableDataStore<TIdentifier, TEntry,
         TSearchCriteria>
     where TSearchCriteria : TestSearchCriteria
-    where TEntity : TestEntity
+    where TEntry : TestEntry, IDataEntry
 {
-    private Lazy<ConcurrentDictionary<TIdentifier, TEntity>> _dictionary =
-        new Lazy<ConcurrentDictionary<TIdentifier, TEntity>>(() => new ConcurrentDictionary<TIdentifier, TEntity>());
+    private readonly Lazy<ConcurrentDictionary<TIdentifier, TEntry>> _dictionary =
+        new Lazy<ConcurrentDictionary<TIdentifier, TEntry>>(() => new ConcurrentDictionary<TIdentifier, TEntry>());
 
-    public async Task WriteAsync(TIdentifier identifier, TEntity content,
+    public async Task WriteAsync(TIdentifier id, TEntry content,
         CancellationToken cancellationToken = default(CancellationToken))
     {
-        await Task.Run(async () => { _dictionary.Value.TryAdd(identifier, content); }, cancellationToken);
+        await Task.Run(async () => { _dictionary.Value.TryAdd(id, content); }, cancellationToken);
     }
 
-    public async Task<TEntity> ReadAsync(TIdentifier identifier, CancellationToken cancellationToken)
+    public async Task<TEntry> ReadAsync(TIdentifier id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(TIdentifier identifier, TEntity content, CancellationToken cancellationToken)
+    public Task UpdateAsync(TIdentifier id, TEntry content, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(TIdentifier identifier, CancellationToken cancellationToken)
+    public Task DeleteAsync(TIdentifier id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<IReadOnlyCollection<TEntity>> SearchAsync(TSearchCriteria searchCriteria,
+    public async Task<IReadOnlyCollection<TEntry>> SearchAsync(TSearchCriteria searchCriteria,
         CancellationToken cancellationToken = default(CancellationToken))
     {
         return await Task.Run(
