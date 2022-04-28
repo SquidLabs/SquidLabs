@@ -3,16 +3,15 @@ using System.Text;
 using SquidLabs.Hashing;
 using SquidLabs.Tentacles.Domain.Objects;
 
-namespace SquidLabs.Tentacles.Domain.Tests.Objects;
+namespace SquidLabs.Tentacles.Domain.Tests;
 
 internal record struct PhoneNumber : IValueObject<Guid>
 {
     public readonly CountryCodes CountryCode;
-    public readonly string Extension;
-
+    public readonly string? Extension;
     public readonly ulong NationalNumber;
 
-    public PhoneNumber(CountryCodes countryCode, ulong nationalNumber, string extension) : this()
+    public PhoneNumber(CountryCodes countryCode, ulong nationalNumber, string? extension) : this()
     {
         CountryCode = countryCode;
         NationalNumber = nationalNumber;
@@ -32,7 +31,7 @@ internal record struct PhoneNumber : IValueObject<Guid>
 
     public Guid GetKey()
     {
-        if (Key != default(Guid)) return Key;
+        if (Key != default) return Key;
         var bytes = new byte[16];
         Buffer.BlockCopy(NormalizedConverter.GetBytes((int)CountryCode), 0, bytes, 0, 4);
         Buffer.BlockCopy(NormalizedConverter.GetBytes(NationalNumber), 0, bytes, 4, 4);

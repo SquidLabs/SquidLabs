@@ -1,6 +1,6 @@
 using System;
-using NUnit.Framework;
 using SquidLabs.Tentacles.Domain.Objects;
+using Xunit;
 
 namespace SquidLabs.Tentacles.Domain.Tests.Objects;
 
@@ -10,7 +10,7 @@ public class DomainObjectImplementationGuid : IDomainObject<Guid>
 
     public bool Equals(IDomainObject<Guid>? other)
     {
-        return GetKey().Equals(other.GetKey());
+        return GetKey().Equals(other?.GetKey());
     }
 
     public Guid GetKey()
@@ -25,7 +25,7 @@ public class DomainObjectImplementationInt : IDomainObject<int>
 
     public bool Equals(IDomainObject<int>? other)
     {
-        return GetKey().Equals(other.GetKey());
+        return GetKey().Equals(other?.GetKey());
     }
 
     public int GetKey()
@@ -34,18 +34,17 @@ public class DomainObjectImplementationInt : IDomainObject<int>
     }
 }
 
-[TestFixture]
 public class DomainObjectTests
 {
-    [Test]
+    [Fact]
     public void ShouldBeEqualGuidIdWithDefaultNew()
     {
         IDomainObject<Guid> d1 = new DomainObjectImplementationGuid();
         IDomainObject<Guid> d2 = new DomainObjectImplementationGuid();
-        Assert.AreEqual(d1, d1);
+        Assert.Equal(d1, d1);
     }
 
-    [Test]
+    [Fact]
     public void ShouldBeEqualGuidIdWhenBothAreInitialized()
     {
         var testValue1 = Guid.NewGuid();
@@ -53,11 +52,11 @@ public class DomainObjectTests
         IDomainObject<Guid> d1 = new DomainObjectImplementationGuid { Id = testValue1 };
         IDomainObject<Guid> d2 = new DomainObjectImplementationGuid { Id = testValue2 };
 
-        Assert.AreEqual(testValue1, testValue2);
-        Assert.AreEqual(d1, d2);
+        Assert.Equal(testValue1, testValue2);
+        Assert.Equal(d1, d2);
     }
 
-    [Test]
+    [Fact]
     public void ShouldFailWhenGuidIdAreDifferent()
     {
         var testValue1 = Guid.NewGuid();
@@ -65,19 +64,19 @@ public class DomainObjectTests
         IDomainObject<Guid> d1 = new DomainObjectImplementationGuid { Id = testValue1 };
         IDomainObject<Guid> d2 = new DomainObjectImplementationGuid { Id = testValue2 };
 
-        Assert.AreNotEqual(testValue1, testValue2);
-        Assert.AreNotEqual(d1, d2);
+        Assert.NotEqual(testValue1, testValue2);
+        Assert.NotEqual(d1, d2);
     }
 
-    [Test]
+    [Fact]
     public void ShouldBeEqualIntIdWithDefaultNew()
     {
         IDomainObject<int> d1 = new DomainObjectImplementationInt();
         IDomainObject<int> d2 = new DomainObjectImplementationInt();
-        Assert.AreEqual(d1, d1);
+        Assert.Equal(d1, d1);
     }
 
-    [Test]
+    [Fact]
     public void ShouldBeEqualIntIdWhenBothAreInitialized()
     {
         var testValue1 = 128;
@@ -85,11 +84,11 @@ public class DomainObjectTests
         IDomainObject<int> d1 = new DomainObjectImplementationInt { Id = testValue1 };
         IDomainObject<int> d2 = new DomainObjectImplementationInt { Id = testValue2 };
 
-        Assert.AreEqual(testValue1, testValue2);
-        Assert.AreEqual(d1, d2);
+        Assert.Equal(testValue1, testValue2);
+        Assert.Equal(d1, d2);
     }
 
-    [Test]
+    [Fact]
     public void ShouldFailWhenIntIdAreDifferent()
     {
         var testValue1 = 128;
@@ -97,7 +96,7 @@ public class DomainObjectTests
         IDomainObject<int> d1 = new DomainObjectImplementationInt { Id = testValue1 };
         IDomainObject<int> d2 = new DomainObjectImplementationInt { Id = testValue2 };
 
-        Assert.AreNotEqual(testValue1, testValue2);
-        Assert.AreNotEqual(d1, d2);
+        Assert.NotEqual(testValue1, testValue2);
+        Assert.NotEqual(d1, d2);
     }
 }

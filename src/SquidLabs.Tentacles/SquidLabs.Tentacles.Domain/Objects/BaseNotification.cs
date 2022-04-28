@@ -12,15 +12,15 @@ public class BaseNotification<TEvent> : INotification<TEvent, Guid> where TEvent
 
     /// <summary>
     /// </summary>
-    public Uri SourceAddress { get; }
+    public Uri SourceAddress { get; } = null!;
 
     /// <summary>
     /// </summary>
-    public Uri DestinationAddress { get; }
+    public Uri DestinationAddress { get; } = null!;
 
     /// <summary>
     /// </summary>
-    public Uri FaultAddress { get; }
+    public Uri FaultAddress { get; } = null!;
 
     /// <summary>
     /// </summary>
@@ -32,5 +32,5 @@ public class BaseNotification<TEvent> : INotification<TEvent, Guid> where TEvent
 
     /// <summary>
     /// </summary>
-    public TEvent Event { get; }
+    public TEvent Event { get; } = default!;
 }

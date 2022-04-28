@@ -1,6 +1,6 @@
 using System;
-using NUnit.Framework;
 using SquidLabs.Tentacles.Domain.Objects;
+using Xunit;
 
 namespace SquidLabs.Tentacles.Domain.Tests.Objects;
 
@@ -8,8 +8,8 @@ public class ValueObjectRecordClassTests
 {
     public record Address : BaseValueObject
     {
-        public Address(string addressLine1, string addressLine2, string building, string city, string countryRegion,
-            string floorLevel, int postalCode, string stateProvince)
+        public Address(string addressLine1, string? addressLine2, string? building, string city, string countryRegion,
+            string? floorLevel, int postalCode, string stateProvince)
         {
             AddressLine1 = addressLine1;
             AddressLine2 = addressLine2;
@@ -27,7 +27,7 @@ public class ValueObjectRecordClassTests
         public string? Building { get; init; }
         public string City { get; init; }
         public string CountryRegion { get; init; }
-        public string FloorLevel { get; init; }
+        public string? FloorLevel { get; init; }
         public int PostalCode { get; init; }
 
         public string StateProvince { get; init; }
@@ -40,40 +40,38 @@ public class ValueObjectRecordClassTests
 
     public class ValueObjectRecordStructTests
     {
-        private Address _a1;
-        private Address _a2;
-        private Address _a3;
-        private Address _a4;
+        private Address _a1 = null!;
+        private Address _a2 = null!;
 
-        [SetUp]
+        [Fact]
         public void Setup()
         {
-            _a1 = new Address("1600 Pennsylvania Ave", null, null, "Washington", null, null, 20500, "D.C.");
-            _a2 = new Address("1600 Pennsylvania Ave", null, null, "Washington", null, null, 20500, "D.C.");
+            _a1 = new Address("1600 Pennsylvania Ave", null, null, "Washington", "USA", null, 20500, "D.C.");
+            _a2 = new Address("1600 Pennsylvania Ave", null, null, "Washington", "USA", null, 20500, "D.C.");
         }
 
-        [Test]
+        [Fact]
         public void ValueObjectRecordStructHashesCorrectly()
         {
-            Assert.AreEqual(_a1.Key, new Guid("0000022b-14bd-0000-0000-000000000000"));
+            Assert.Equal(_a1.Key, new Guid("0000022b-14bd-0000-0000-000000000000"));
         }
 
-        [Test]
+        [Fact]
         public void ValueObjectDifferentConstructorsStillEqual()
         {
-            //Assert.AreEqual(p1, p2);
+            //Assert.Equal(p1, p2);
         }
 
-        [Test]
+        [Fact]
         public void ValueObjectDifferentValuesNotEqual()
         {
-            // Assert.AreNotEqual(p1, p3);
+            // Assert.NotEqual(p1, p3);
         }
 
-        [Test]
+        [Fact]
         public void ValueObjectDifferentSingleBitDifferencesNotEqual()
         {
-            //Assert.AreNotEqual(p3, p4);
+            //Assert.NotEqual(p3, p4);
         }
     }
 }

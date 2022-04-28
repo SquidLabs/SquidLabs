@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace SquidLabs.Hashing;
@@ -13,7 +14,7 @@ public static class NormalizedConverter
     /// <returns></returns>
     public static byte[] GetBytes(DateTime dt)
     {
-        return NormalizeBytesByEndianess(BitConverter.GetBytes(dt.ToUniversalTime().ToBinary()));
+        return NormalizeBytesByEndianness(BitConverter.GetBytes(dt.ToUniversalTime().ToBinary()));
     }
 
     /// <summary>
@@ -23,7 +24,7 @@ public static class NormalizedConverter
     /// <returns></returns>
     public static byte[] GetBytes(int i)
     {
-        return NormalizeBytesByEndianess(BitConverter.GetBytes(i));
+        return NormalizeBytesByEndianness(BitConverter.GetBytes(i));
     }
 
     /// <summary>
@@ -33,7 +34,7 @@ public static class NormalizedConverter
     /// <returns></returns>
     public static byte[] GetBytes(long l)
     {
-        return NormalizeBytesByEndianess(BitConverter.GetBytes(l));
+        return NormalizeBytesByEndianness(BitConverter.GetBytes(l));
     }
 
     /// <summary>
@@ -43,17 +44,19 @@ public static class NormalizedConverter
     /// <returns></returns>
     public static byte[] GetBytes(ulong ul)
     {
-        return NormalizeBytesByEndianess(BitConverter.GetBytes(ul));
+        return NormalizeBytesByEndianness(BitConverter.GetBytes(ul));
     }
 
     /// <summary>
     ///     Convert string to bytes
     /// </summary>
     /// <param name="s"></param>
+    /// <param name="encoding"></param>
     /// <returns></returns>
-    public static byte[] GetBytes(string s, Encoding encoding = null)
+    public static byte[] GetBytes(string? s, Encoding? encoding = null)
     {
-        encoding ??= Encoding.Unicode;
+        if (s is null) return new byte[] { };
+        encoding ??= Encoding.Default;
         // TODO: check if Endianness flip is necessary 
         return encoding.GetBytes(s);
     }
@@ -65,7 +68,7 @@ public static class NormalizedConverter
     /// <returns></returns>
     public static byte[] GetBytes(Uri uri)
     {
-        return NormalizeBytesByEndianess(Encoding.UTF8.GetBytes(uri.ToString()));
+        return NormalizeBytesByEndianness(Encoding.UTF8.GetBytes(uri.ToString()));
     }
 
     /// <summary>
@@ -73,7 +76,8 @@ public static class NormalizedConverter
     /// </summary>
     /// <param name="bytes"></param>
     /// <returns></returns>
-    private static byte[] NormalizeBytesByEndianess(byte[] bytes)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static byte[] NormalizeBytesByEndianness(byte[] bytes)
     {
         if (!BitConverter.IsLittleEndian) Array.Reverse(bytes);
         return bytes;

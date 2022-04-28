@@ -4,13 +4,13 @@ namespace SquidLabs.Tentacles.Domain.Tests;
 
 public class ProductEntity : BaseEntity
 {
-    public string Name { get; set; }
-    public string ModelNumber { get; set; }
+    public string Name { get; set; } = null!;
+    public string ModelNumber { get; set; } = null!;
     public decimal Price { get; init; }
-    public string Description { get; init; }
+    public string Description { get; init; } = default!;
     public int Quantity { get; set; }
 
-    public void changeAvailableQuantity(int quantity)
+    public void ChangeAvailableQuantity(int quantity)
     {
         Quantity = quantity;
     }

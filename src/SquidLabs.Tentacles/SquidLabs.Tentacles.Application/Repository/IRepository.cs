@@ -13,7 +13,7 @@ public interface IRepository<TDomainObject, TKey> where TDomainObject : class, I
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TDomainObject> GetAsync(TKey id, CancellationToken cancellationToken = default);
+    Task<TDomainObject?> GetAsync(TKey id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// </summary>
