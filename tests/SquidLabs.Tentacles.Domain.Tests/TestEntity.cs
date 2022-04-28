@@ -10,8 +10,8 @@ public class TestEntity : BaseEntity
         Value = value;
         Id = Guid.NewGuid();
     }
-    
-    public TestEntity(Guid id,string value)
+
+    public TestEntity(Guid id, string value)
     {
         Value = value;
         Id = id;

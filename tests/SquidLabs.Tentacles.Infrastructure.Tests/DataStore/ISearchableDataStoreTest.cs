@@ -1,20 +1,20 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace SquidLabs.Tentacles.Infrastructure.Tests.DataStore;
 
 public class ISearchableDataStoreTest
 {
-    [Test]
+    [Fact]
     public async Task ShouldBeAbleToSearchISearchableDataStore()
     {
-        var dataStore = new TestSearchDataStore<Guid, TestEntry, TestSearchCriteria>();
-        var ackbar = new TestEntry
-            { Id = Guid.NewGuid(), FirstName = "Gial", LastName = "Ackbar", Phrase = "It's a trap!" };
+        var dataStore = new TestSearchDataStore<Guid, TestDataEntry, TestSearchCriteria>();
+        var ackbar = new TestDataEntry
+            { Id = Guid.NewGuid(), FirstName = "Gial", LastName = "Ackbar", Quote = "It's a trap!" };
         await dataStore.WriteAsync(ackbar.Id, ackbar);
         var response = await dataStore.SearchAsync(new TestSearchCriteria { LastName = "ackbar" });
-        Assert.AreEqual(response.FirstOrDefault().Id, ackbar.Id);
+        Assert.Equal(response.FirstOrDefault()?.Id, ackbar.Id);
     }
 }

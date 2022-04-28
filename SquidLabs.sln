@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Platform.AspNet", "src\SquidLabs.Platform\SquidLabs.Platform.AspNet\SquidLabs.Platform.AspNet.csproj", "{C0534AA3-0949-4184-AC6D-69CA20CB7B72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Platform.AspNetCore", "src\SquidLabs.Platform\SquidLabs.Platform.AspNetCore\SquidLabs.Platform.AspNetCore.csproj", "{C0534AA3-0949-4184-AC6D-69CA20CB7B72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Application", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Application\SquidLabs.Tentacles.Application.csproj", "{158067F9-1B45-46A8-BB61-65AE418B157A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Domain", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Domain\SquidLabs.Tentacles.Domain.csproj", "{7C3F553C-A5CD-4F2F-8FB9-BF71541597E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Platform.Console", "src\SquidLabs.Platform\SquidLabs.Platform.Console\SquidLabs.Platform.Console.csproj", "{F983761B-1782-47F8-835E-E54B085D8F1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Platform.ConsoleHost", "src\SquidLabs.Platform\SquidLabs.Platform.ConsoleHost\SquidLabs.Platform.ConsoleHost.csproj", "{F983761B-1782-47F8-835E-E54B085D8F1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure\SquidLabs.Tentacles.Infrastructure.csproj", "{A80B11B5-E4E6-4393-9C32-FBBDA0F8E11B}"
 EndProject
@@ -33,6 +33,32 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests\SquidLabs.Tentacles.Infrastructure.Tests", "tests\SquidLabs.Tentacles.Infrastructure.Tests\SquidLabs.Tentacles.Infrastructure.Tests.csproj", "{B81F1F68-7770-4AE7-972A-096BD6118DFA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Aws", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Aws\SquidLabs.Tentacles.Infrastructure.Aws.csproj", "{425F46FD-A4D2-4B68-9F04-254AECB3AFDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Azure", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Azure\SquidLabs.Tentacles.Infrastructure.Azure.csproj", "{BC14DB9B-1452-4798-BFDD-860A10CF7ABA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Mongo", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Mongo\SquidLabs.Tentacles.Infrastructure.Mongo.csproj", "{A48F8C00-60C5-4365-BFAD-4C681DB97569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Redis", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Redis\SquidLabs.Tentacles.Infrastructure.Redis.csproj", "{08A51A3C-C4F6-4D67-B81D-64901EA21000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Dapper", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Dapper\SquidLabs.Tentacles.Infrastructure.Dapper.csproj", "{A5BE48DD-3173-49E3-81CB-DD2C65CB45DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Elastic", "src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Elastic\SquidLabs.Tentacles.Infrastructure.Elastic.csproj", "{B0909115-8384-4F56-8778-C6E22021445A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Redis.IntegrationTests", "tests\SquidLabs.Tentacles.Infrastructure.Redis.IntegrationTests\SquidLabs.Tentacles.Infrastructure.Redis.IntegrationTests.csproj", "{6430D32B-CEAF-449E-A888-FBB310369289}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Elastic.IntegrationTests", "tests\SquidLabs.Tentacles.Infrastructure.Elastic.IntegrationTests\SquidLabs.Tentacles.Infrastructure.Elastic.IntegrationTests.csproj", "{13A40B15-80C3-4BE3-BB90-4A6A1B7C36A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Mongo.IntegrationTests", "tests\SquidLabs.Tentacles.Infrastructure.Mongo.IntegrationTests\SquidLabs.Tentacles.Infrastructure.Mongo.IntegrationTests.csproj", "{4825DA38-0CE7-48C4-8C5E-636C74318547}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Dapper.IntegrationTests", "tests\SquidLabs.Tentacles.Infrastructure.Dapper.IntegrationTests\SquidLabs.Tentacles.Infrastructure.Dapper.IntegrationTests.csproj", "{F6F4879C-A65F-45FB-B947-CB49840D8DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Aws.IntegrationTests", "tests\SquidLabs.Tentacles.Infrastructure.Aws.IntegrationTests\SquidLabs.Tentacles.Infrastructure.Aws.IntegrationTests.csproj", "{B2374467-C8F5-4585-A7B4-ABE3400FEE99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Azure.IntegrationTests", "tests\SquidLabs.Tentacles.Infrastructure.Azure.IntegrationTests\SquidLabs.Tentacles.Infrastructure.Azure.IntegrationTests.csproj", "{69A861EA-7B5D-4939-B66F-DA30B9463388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Task.Extensions", "src\SquidLabs.Task.Extensions\SquidLabs.Task.Extensions.csproj", "{99639C96-B5C0-439F-A884-9B2D9905C279}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,6 +122,58 @@ Global
 		{B81F1F68-7770-4AE7-972A-096BD6118DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B81F1F68-7770-4AE7-972A-096BD6118DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B81F1F68-7770-4AE7-972A-096BD6118DFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425F46FD-A4D2-4B68-9F04-254AECB3AFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425F46FD-A4D2-4B68-9F04-254AECB3AFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425F46FD-A4D2-4B68-9F04-254AECB3AFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425F46FD-A4D2-4B68-9F04-254AECB3AFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC14DB9B-1452-4798-BFDD-860A10CF7ABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC14DB9B-1452-4798-BFDD-860A10CF7ABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC14DB9B-1452-4798-BFDD-860A10CF7ABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC14DB9B-1452-4798-BFDD-860A10CF7ABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A48F8C00-60C5-4365-BFAD-4C681DB97569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A48F8C00-60C5-4365-BFAD-4C681DB97569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A48F8C00-60C5-4365-BFAD-4C681DB97569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A48F8C00-60C5-4365-BFAD-4C681DB97569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A51A3C-C4F6-4D67-B81D-64901EA21000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A51A3C-C4F6-4D67-B81D-64901EA21000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A51A3C-C4F6-4D67-B81D-64901EA21000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A51A3C-C4F6-4D67-B81D-64901EA21000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BE48DD-3173-49E3-81CB-DD2C65CB45DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BE48DD-3173-49E3-81CB-DD2C65CB45DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BE48DD-3173-49E3-81CB-DD2C65CB45DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BE48DD-3173-49E3-81CB-DD2C65CB45DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0909115-8384-4F56-8778-C6E22021445A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0909115-8384-4F56-8778-C6E22021445A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0909115-8384-4F56-8778-C6E22021445A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0909115-8384-4F56-8778-C6E22021445A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6430D32B-CEAF-449E-A888-FBB310369289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6430D32B-CEAF-449E-A888-FBB310369289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6430D32B-CEAF-449E-A888-FBB310369289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6430D32B-CEAF-449E-A888-FBB310369289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A40B15-80C3-4BE3-BB90-4A6A1B7C36A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A40B15-80C3-4BE3-BB90-4A6A1B7C36A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A40B15-80C3-4BE3-BB90-4A6A1B7C36A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A40B15-80C3-4BE3-BB90-4A6A1B7C36A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4825DA38-0CE7-48C4-8C5E-636C74318547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4825DA38-0CE7-48C4-8C5E-636C74318547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4825DA38-0CE7-48C4-8C5E-636C74318547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4825DA38-0CE7-48C4-8C5E-636C74318547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6F4879C-A65F-45FB-B947-CB49840D8DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F4879C-A65F-45FB-B947-CB49840D8DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F4879C-A65F-45FB-B947-CB49840D8DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F4879C-A65F-45FB-B947-CB49840D8DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2374467-C8F5-4585-A7B4-ABE3400FEE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2374467-C8F5-4585-A7B4-ABE3400FEE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2374467-C8F5-4585-A7B4-ABE3400FEE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2374467-C8F5-4585-A7B4-ABE3400FEE99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A861EA-7B5D-4939-B66F-DA30B9463388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A861EA-7B5D-4939-B66F-DA30B9463388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A861EA-7B5D-4939-B66F-DA30B9463388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A861EA-7B5D-4939-B66F-DA30B9463388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99639C96-B5C0-439F-A884-9B2D9905C279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99639C96-B5C0-439F-A884-9B2D9905C279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99639C96-B5C0-439F-A884-9B2D9905C279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99639C96-B5C0-439F-A884-9B2D9905C279}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C0534AA3-0949-4184-AC6D-69CA20CB7B72} = {435BC315-6663-40B9-BB39-C078BB026A73}
@@ -109,5 +187,17 @@ Global
 		{2902C6D9-C187-4E41-9D1F-8A5D5ED430BC} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
 		{A8BED3F5-24A2-47FE-BDB8-E9F0339045E8} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
 		{B81F1F68-7770-4AE7-972A-096BD6118DFA} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
+		{425F46FD-A4D2-4B68-9F04-254AECB3AFDB} = {D76459DE-BBDE-4CC5-A34F-5FDD8F46E421}
+		{BC14DB9B-1452-4798-BFDD-860A10CF7ABA} = {D76459DE-BBDE-4CC5-A34F-5FDD8F46E421}
+		{A48F8C00-60C5-4365-BFAD-4C681DB97569} = {D76459DE-BBDE-4CC5-A34F-5FDD8F46E421}
+		{08A51A3C-C4F6-4D67-B81D-64901EA21000} = {D76459DE-BBDE-4CC5-A34F-5FDD8F46E421}
+		{A5BE48DD-3173-49E3-81CB-DD2C65CB45DD} = {D76459DE-BBDE-4CC5-A34F-5FDD8F46E421}
+		{B0909115-8384-4F56-8778-C6E22021445A} = {D76459DE-BBDE-4CC5-A34F-5FDD8F46E421}
+		{6430D32B-CEAF-449E-A888-FBB310369289} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
+		{13A40B15-80C3-4BE3-BB90-4A6A1B7C36A8} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
+		{4825DA38-0CE7-48C4-8C5E-636C74318547} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
+		{F6F4879C-A65F-45FB-B947-CB49840D8DDD} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
+		{B2374467-C8F5-4585-A7B4-ABE3400FEE99} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
+		{69A861EA-7B5D-4939-B66F-DA30B9463388} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,13 @@
+# this compose file will start local services the same as those running on appveyor CI for testing.
+
+version: '2.3'
+services:
+  localstack:
+    image: "localstack/localstack:latest"
+    container_name: localstack
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+      - SERVICES=dynamodb,s3
+    ports:
+      - '4566-4583:4566-4583'

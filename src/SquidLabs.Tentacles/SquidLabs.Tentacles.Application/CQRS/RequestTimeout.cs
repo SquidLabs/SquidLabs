@@ -12,6 +12,6 @@ public struct RequestTimeout
         _timeout = timeout;
     }
 
-    public static RequestTimeout None => new RequestTimeout(TimeSpan.Zero);
-    public static RequestTimeout Default => new RequestTimeout(TimeSpan.FromSeconds(30));
+    public static RequestTimeout None => new(TimeSpan.Zero);
+    public static RequestTimeout Default => new(TimeSpan.FromSeconds(30));
 }

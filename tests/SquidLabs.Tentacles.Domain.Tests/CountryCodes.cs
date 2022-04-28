@@ -1,4 +1,4 @@
-namespace SquidLabs.Tentacles.Domain.Tests.Objects;
+namespace SquidLabs.Tentacles.Domain.Tests;
 
 public enum CountryCodes
 {

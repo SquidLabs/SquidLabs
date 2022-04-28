@@ -15,7 +15,7 @@ public class InjectionRequestClient<TRequest> : IRequestClient<TRequest>
     }
 
     public Task<IResponse<T>> GetResponse<T>(TRequest message, CancellationToken cancellationToken = default,
-        RequestTimeout timeout = default(RequestTimeout)) where T : class
+        RequestTimeout timeout = default) where T : class
     {
         _logger.LogInformation("Request Client calling handler for message", message);
 
