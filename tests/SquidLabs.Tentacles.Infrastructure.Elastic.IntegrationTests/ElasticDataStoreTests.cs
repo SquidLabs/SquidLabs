@@ -218,7 +218,7 @@ public class ElasticSearchDataStoreTests
                 Of all the wonders that I yet have heard. It seems to me most strange that men should fear;
                 Seeing that death, a necessary end, Will come when it will come."
         };
-        
+
         var exception =
             await Record.ExceptionAsync(async () => await _dataStore.UpdateAsync(id, entry, CancellationToken.None));
 

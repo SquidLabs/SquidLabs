@@ -24,7 +24,7 @@ public class
         await Task.Run(() => { _dictionary.Value.TryAdd(id, content); }, cancellationToken);
     }
 
-    public async Task<TDataEntry?> ReadAsync(TIdentifier id, CancellationToken cancellationToken)
+    public Task<TDataEntry?> ReadAsync(TIdentifier id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

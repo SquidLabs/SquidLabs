@@ -35,13 +35,13 @@ public readonly struct Response<T1, T2> :
 
     public DateTime? ExpirationTime => _response.ExpirationTime;
 
-    public Uri? SourceAddress => _response.SourceAddress;
+    public Uri SourceAddress => _response.SourceAddress;
 
-    public Uri? DestinationAddress => _response.DestinationAddress;
+    public Uri DestinationAddress => _response.DestinationAddress;
 
-    public Uri? ResponseAddress => _response.ResponseAddress;
+    public Uri ResponseAddress => _response.ResponseAddress;
 
-    public Uri? FaultAddress => _response.FaultAddress;
+    public Uri FaultAddress => _response.FaultAddress;
 
     public DateTime? SentTime => _response.SentTime;
 

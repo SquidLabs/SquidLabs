@@ -30,19 +30,21 @@ public class DataStoreOperationException : DataStoreException
     /// <param name="message">The error message.</param>
     /// <param name="innerException">The inner exception.</param>
     /// <param name="operationType">Type of operation that error resulted from</param>
-    public DataStoreOperationException(string message, Exception innerException, DataStoreOperationTypeEnum operationType)
+    public DataStoreOperationException(string message, Exception innerException,
+        DataStoreOperationTypeEnum operationType)
         : base(message, innerException)
     {
         OperationType = operationType;
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="DataStoreException" /> class.
     /// </summary>
     /// <param name="message">The error message.</param>
     /// <param name="innerException">The inner exception.</param>
     /// <param name="operationType">Type of operation that error resulted from</param>
-    public DataStoreOperationException(string message, Exception innerException, DataStoreOperationTypeEnum operationType, object data)
+    public DataStoreOperationException(string message, Exception innerException,
+        DataStoreOperationTypeEnum operationType, object data)
         : base(message, innerException)
     {
         OperationType = operationType;

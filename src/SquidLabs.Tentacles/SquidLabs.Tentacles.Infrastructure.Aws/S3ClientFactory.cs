@@ -22,6 +22,6 @@ public class S3ClientFactory<TDataEntry> : IClientFactory<TDataEntry, IS3StoreOp
     {
         // AmazonS3Client is thread safe and sharing is recommended set max connections property
         return new AmazonS3Client(_s3StoreOptionsMonitor.CurrentValue.Credentials?.AccessKey,
-            _s3StoreOptionsMonitor.CurrentValue.Credentials.SecretKey, _clientConfig);
+            _s3StoreOptionsMonitor.CurrentValue.Credentials?.SecretKey, _clientConfig);
     }
 }

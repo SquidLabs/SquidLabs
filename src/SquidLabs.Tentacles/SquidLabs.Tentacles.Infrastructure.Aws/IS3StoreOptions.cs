@@ -10,6 +10,8 @@ public interface IS3StoreOptions<TDataEntry> : IConnectionOptions<TDataEntry>
     /// <summary>
     /// </summary>
     public string BucketName { get; set; }
+    
+    public string ServiceURL  { get; set; }
 
     /// <summary>
     /// </summary>

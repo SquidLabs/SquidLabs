@@ -1,4 +1,4 @@
-namespace SquidLabs.Tentacles.Domain.Objects;
+namespace SquidLabs.Tentacles.Domain.Events;
 
 public class BaseNotification<TEvent> : INotification<TEvent, Guid> where TEvent : IDomainEvent<Guid>
 {
@@ -9,19 +9,7 @@ public class BaseNotification<TEvent> : INotification<TEvent, Guid> where TEvent
     /// <summary>
     /// </summary>
     public Guid CorrelationId { get; }
-
-    /// <summary>
-    /// </summary>
-    public Uri SourceAddress { get; } = null!;
-
-    /// <summary>
-    /// </summary>
-    public Uri DestinationAddress { get; } = null!;
-
-    /// <summary>
-    /// </summary>
-    public Uri FaultAddress { get; } = null!;
-
+    
     /// <summary>
     /// </summary>
     public DateTime? ExpirationTime { get; }

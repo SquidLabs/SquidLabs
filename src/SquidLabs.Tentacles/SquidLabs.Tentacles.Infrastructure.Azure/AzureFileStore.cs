@@ -5,7 +5,7 @@ namespace SquidLabs.Tentacles.Infrastructure.Azure;
 
 /// <summary>
 /// </summary>
-public class AzureFileStore<TFileEntry> : IFileStore<string, TFileEntry> where TFileEntry : IFileEntry
+public class AzureFileStore<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry : IFileEntry
 {
     /// <summary>
     /// </summary>
@@ -24,10 +24,10 @@ public class AzureFileStore<TFileEntry> : IFileStore<string, TFileEntry> where T
     /// <param name="id"></param>
     /// <param name="fileEntry"></param>
     /// <param name="cancellationToken"></param>
-    public async Task WriteAsync(string id, TFileEntry fileEntry,
+    public async Task WriteAsync(Guid id, TFileEntry fileEntry,
         CancellationToken cancellationToken = default)
     {
-        var blob = _clientFactory.GetBlobClient(id);
+        var blob = _clientFactory.GetBlobClient(id.ToString());
         await blob.UploadAsync(await fileEntry.ToStreamAsync(cancellationToken), cancellationToken)
             .ConfigureAwait(false);
         ;
@@ -38,13 +38,13 @@ public class AzureFileStore<TFileEntry> : IFileStore<string, TFileEntry> where T
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<TFileEntry?> ReadAsync(string id,
+    public async Task<TFileEntry?> ReadAsync(Guid id,
         CancellationToken cancellationToken = default)
     {
-        var blob = _clientFactory.GetBlobClient(id);
+        var blob = _clientFactory.GetBlobClient(id.ToString());
         var result = await blob.DownloadStreamingAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         ;
-        return (TFileEntry?)await TFileEntry.FromStreamAsync(result.Value.Content);
+        return (TFileEntry?)await TFileEntry.FromStreamAsync(id.ToString(), result.Value.Content, cancellationToken);
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class AzureFileStore<TFileEntry> : IFileStore<string, TFileEntry> where T
     /// <param name="id"></param>
     /// <param name="fileEntry"></param>
     /// <param name="cancellationToken"></param>
-    public async Task UpdateAsync(string id, TFileEntry fileEntry,
+    public async Task UpdateAsync(Guid id, TFileEntry fileEntry,
         CancellationToken cancellationToken = default)
     {
         await WriteAsync(id, fileEntry, cancellationToken).ConfigureAwait(false);
@@ -62,9 +62,9 @@ public class AzureFileStore<TFileEntry> : IFileStore<string, TFileEntry> where T
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
-    public async Task DeleteAsync(string id, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var response = await _clientFactory.GetClient().DeleteBlobAsync(id, cancellationToken: cancellationToken)
+        var response = await _clientFactory.GetClient().DeleteBlobAsync(id.ToString(), cancellationToken: cancellationToken)
             .ConfigureAwait(false);
     }
 }

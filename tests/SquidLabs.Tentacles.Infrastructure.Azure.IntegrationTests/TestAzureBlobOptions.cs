@@ -1,5 +1,3 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
 using SquidLabs.Tentacles.Infrastructure.Azure;
 using SquidLabs.Tentacles.Infrastructure.Tests;
 

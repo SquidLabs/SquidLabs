@@ -5,7 +5,7 @@ namespace SquidLabs.Tentacles.Infrastructure.Abstractions;
 /// </summary>
 /// <typeparam name="TIdentifier">id</typeparam>
 /// <typeparam name="TEntry"></typeparam>
-public interface IDataStore<TIdentifier, TEntry> : IStore<TIdentifier, TEntry>
+public interface IDataStore<in TIdentifier, TEntry> : IStore<TIdentifier, TEntry>
     where TEntry : IDataEntry
 {
 }

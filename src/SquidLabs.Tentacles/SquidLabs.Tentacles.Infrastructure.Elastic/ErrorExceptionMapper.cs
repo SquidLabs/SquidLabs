@@ -5,9 +5,13 @@ namespace SquidLabs.Tentacles.Infrastructure.Elastic;
 
 public static class ErrorExceptionMapper
 {
-    public static Exception ToException(this Error error) => error switch
+    public static Exception ToException(this Error error)
     {
-        { Type: "document_missing_exception" } =>  new DataStoreEntryNotFound(error.ToString(), DataStoreOperationTypeEnum.Update),
-        _ => new DataStoreException(error.ToString())
-    };
+        return error switch
+        {
+            { Type: "document_missing_exception" } => new DataStoreEntryNotFound(error.ToString(),
+                DataStoreOperationTypeEnum.Update),
+            _ => new DataStoreException(error.ToString())
+        };
+    }
 }
