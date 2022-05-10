@@ -8,7 +8,7 @@ public class ValueObjectRecordStructTests
     private readonly PhoneNumber _p1;
     private readonly PhoneNumber _p2;
     private readonly PhoneNumber _p3;
-    private PhoneNumber _p4;
+    private readonly PhoneNumber _p4;
 
     public ValueObjectRecordStructTests()
     {

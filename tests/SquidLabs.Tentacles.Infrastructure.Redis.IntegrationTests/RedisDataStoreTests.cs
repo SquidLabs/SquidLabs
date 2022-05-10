@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using Moq;
 using SquidLabs.Tentacles.Infrastructure.Abstractions;
 using SquidLabs.Tentacles.Infrastructure.Exceptions;
-using SquidLabs.Tentacles.Infrastructure.Redis;
 using SquidLabs.Tentacles.Infrastructure.Tests;
 using StackExchange.Redis;
 using Xunit;
@@ -21,13 +20,13 @@ public class RedisDataStoreTests
     public RedisDataStoreTests()
     {
         var mockOptionsMonitorForRedis = new Mock<IOptionsMonitor<TestRedisOptions>>();
-        mockOptionsMonitorForRedis.Setup(monitor => monitor.CurrentValue).Returns(new TestRedisOptions()
+        mockOptionsMonitorForRedis.Setup(monitor => monitor.CurrentValue).Returns(new TestRedisOptions
         {
             Database = 1,
             ConnectionDefinition = "mongodb://127.0.0.1"
         });
 
-       _redisOptions = mockOptionsMonitorForRedis.Object;
+        _redisOptions = mockOptionsMonitorForRedis.Object;
         _clientFactory = new RedisClientFactory<TestDataEntry>(_redisOptions);
         _dataStore = new RedisStore<Guid, TestDataEntry>(_clientFactory);
     }

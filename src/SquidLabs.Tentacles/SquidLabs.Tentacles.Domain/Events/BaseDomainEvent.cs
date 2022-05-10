@@ -1,4 +1,6 @@
-namespace SquidLabs.Tentacles.Domain.Objects;
+using SquidLabs.Tentacles.Domain.Objects;
+
+namespace SquidLabs.Tentacles.Domain.Events;
 
 /// <summary>
 /// </summary>

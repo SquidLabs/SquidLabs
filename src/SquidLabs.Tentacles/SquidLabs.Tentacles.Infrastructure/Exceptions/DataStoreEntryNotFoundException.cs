@@ -35,14 +35,15 @@ public class DataStoreEntryNotFound : DataStoreOperationException
     {
         OperationType = operationType;
     }
-    
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="DataStoreException" /> class.
     /// </summary>
     /// <param name="message">The error message.</param>
     /// <param name="innerException">The inner exception.</param>
     /// <param name="operationType">Type of operation that error resulted from</param>
-    public DataStoreEntryNotFound(string message, Exception innerException, DataStoreOperationTypeEnum operationType, object data)
+    public DataStoreEntryNotFound(string message, Exception innerException, DataStoreOperationTypeEnum operationType,
+        object data)
         : base(message, innerException)
     {
         OperationType = operationType;

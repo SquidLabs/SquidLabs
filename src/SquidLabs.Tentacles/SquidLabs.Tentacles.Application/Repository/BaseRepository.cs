@@ -15,18 +15,34 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     private readonly IDataStore<TKey, IDataEntry> _dataStore;
     private readonly IMapper<TKey, TDomainObject, IDataEntry> _mapper;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dataStore"></param>
+    /// <param name="mapper"></param>
     protected BaseRepository(IDataStore<TKey, IDataEntry> dataStore, IMapper<TKey, TDomainObject, IDataEntry> mapper)
     {
         _dataStore = dataStore;
         _mapper = mapper;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<TDomainObject?> GetAsync(TKey id, CancellationToken cancellationToken = default)
     {
         var response = await _dataStore.ReadAsync(id, cancellationToken).ConfigureAwait(false);
         return _mapper.ConvertFromDataStoreType(response);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="domainObject"></param>
+    /// <param name="cancellationToken"></param>
     public async Task InsertAsync(TDomainObject domainObject,
         CancellationToken cancellationToken = default)
     {
@@ -35,6 +51,11 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
             await _dataStore.WriteAsync(domainObject.GetKey(), record, cancellationToken).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="domainObject"></param>
+    /// <param name="cancellationToken"></param>
     public async Task UpdateAsync(TDomainObject domainObject,
         CancellationToken cancellationToken = default)
     {
@@ -43,12 +64,22 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
             await _dataStore.UpdateAsync(domainObject.GetKey(), record, cancellationToken).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="domainObject"></param>
+    /// <param name="cancellationToken"></param>
     public async Task DeleteAsync(TDomainObject domainObject,
         CancellationToken cancellationToken = default)
     {
         await _dataStore.DeleteAsync(domainObject.GetKey(), cancellationToken).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
     public async Task DeleteAsync(TKey id, CancellationToken cancellationToken = default)
     {
         await _dataStore.DeleteAsync(id, cancellationToken).ConfigureAwait(false);

@@ -1,4 +1,4 @@
-namespace SquidLabs.Tentacles.Domain.Objects;
+namespace SquidLabs.Tentacles.Domain.Events;
 
 /// <summary>
 /// </summary>
@@ -6,7 +6,7 @@ namespace SquidLabs.Tentacles.Domain.Objects;
 public interface INotification<TEvent, TCorrelation> where TEvent : IDomainEvent<TCorrelation>
 {
     /// <summary>
-    ///     A UUID to track the notifica tion itself, not necessarily describing the event.
+    ///     A UUID to track the notification itself, not necessarily describing the event.
     /// </summary>
     TCorrelation NotificationId { get; }
 
@@ -15,18 +15,6 @@ public interface INotification<TEvent, TCorrelation> where TEvent : IDomainEvent
     ///     The NotificationID may be removed but the correlation should follow the Event (maybe move this into the event)
     /// </summary>
     TCorrelation CorrelationId { get; }
-
-    /// <summary>
-    /// </summary>
-    Uri SourceAddress { get; }
-
-    /// <summary>
-    /// </summary>
-    Uri DestinationAddress { get; }
-
-    /// <summary>
-    /// </summary>
-    Uri FaultAddress { get; }
 
     /// <summary>
     /// </summary>

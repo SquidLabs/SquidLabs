@@ -23,9 +23,9 @@ public class InjectionRequestClient<TRequest> : IRequestClient<TRequest>
         // before handler gets called we run through the DI pipeline (make it look like middleware?)
         // do we want greenpipes style tpl flow?
 
-        IRequestHandlerContext<TRequest> context;
+        //IRequestHandlerContext<TRequest> context;
         //_requestHandler.Handle(context);
-        return null;
+        return Task.FromResult<IResponse<T>>(null!);
     }
 
     public Task<Response<T1, T2>> GetResponse<T1, T2>(TRequest message, CancellationToken cancellationToken = default,
@@ -33,8 +33,8 @@ public class InjectionRequestClient<TRequest> : IRequestClient<TRequest>
     {
         _logger.LogInformation("Request Client calling handler for message", message);
 
-        IRequestHandlerContext<TRequest> context;
+        //IRequestHandlerContext<TRequest> context;
         //_requestHandler.Handle(context);
-        return null;
+        return Task.FromResult(new Response<T1, T2>());
     }
 }

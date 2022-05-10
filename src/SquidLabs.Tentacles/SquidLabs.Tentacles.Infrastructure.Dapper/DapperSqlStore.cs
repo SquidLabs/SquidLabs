@@ -1,4 +1,5 @@
 using System.Data;
+using Dapper;
 using Dapper.Contrib.Extensions;
 using SquidLabs.Tentacles.Infrastructure.Abstractions;
 
@@ -32,7 +33,7 @@ public class DapperSqlStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, T
     public async Task WriteAsync(TIdentifier id, TDataEntry content, CancellationToken cancellationToken = default)
     {
         using var connection = _connectionFactory.GetClient();
-        await connection.InsertAsync(content);
+        await connection.InsertAsync(content).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -43,7 +44,7 @@ public class DapperSqlStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, T
     public async Task<TDataEntry?> ReadAsync(TIdentifier id, CancellationToken cancellationToken = default)
     {
         using var connection = _connectionFactory.GetClient();
-        return await connection.GetAsync<TDataEntry>(id);
+        return await connection.GetAsync<TDataEntry>(id).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -54,7 +55,7 @@ public class DapperSqlStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, T
     public async Task UpdateAsync(TIdentifier id, TDataEntry content, CancellationToken cancellationToken = default)
     {
         using var connection = _connectionFactory.GetClient();
-        await connection.UpdateAsync(content);
+        await connection.UpdateAsync(content).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -63,6 +64,11 @@ public class DapperSqlStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, T
     /// <param name="cancellationToken"></param>
     public async Task DeleteAsync(TIdentifier id, CancellationToken cancellationToken = default)
     {
+        
+        var options = _connectionFactory.ClientOptions;
         using var connection = _connectionFactory.GetClient();
+        await connection
+            .QueryAsync($"DELETE FROM {options.Table} WHERE {options.Key} = @id", new { id })
+            .ConfigureAwait(false);
     }
 }

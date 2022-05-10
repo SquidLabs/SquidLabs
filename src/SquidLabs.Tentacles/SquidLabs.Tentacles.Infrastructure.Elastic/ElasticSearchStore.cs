@@ -1,4 +1,3 @@
-using Elasticsearch.Net;
 using Nest;
 using SquidLabs.Tentacles.Infrastructure.Abstractions;
 
@@ -31,10 +30,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
     {
         var client = _clientFactory.GetClient();
         var response = await client.IndexDocumentAsync(entity, cancellationToken).ConfigureAwait(false);
-        if (response.ServerError is not null)
-        {
-            throw response.ServerError.Error.ToException();
-        }
+        if (response.ServerError is not null) throw response.ServerError.Error.ToException();
     }
 
     /// <summary>
@@ -61,10 +57,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
         var client = _clientFactory.GetClient();
         var response = await client.UpdateAsync<TDataEntry, object>(DocumentPath<TDataEntry>.Id(entity),
             i => i.Index(_clientFactory.ClientOptions.IndexField.ToLower()).Doc(entity), cancellationToken);
-        if (response.ServerError is not null)
-        {
-            throw response.ServerError.Error.ToException();
-        }
+        if (response.ServerError is not null) throw response.ServerError.Error.ToException();
     }
 
     /// <summary>
@@ -79,7 +72,6 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
             .ConfigureAwait(false);
         if (response.ServerError is not null)
         {
-            
         }
     }
 
@@ -94,10 +86,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
         var client = _clientFactory.GetClient();
         var response = await client.SearchAsync<TDataEntry>(searchCriteria, cancellationToken)
             .ConfigureAwait(false);
-        if (response.ServerError is not null)
-        {
-            throw response.ServerError.Error.ToException();
-        }
+        if (response.ServerError is not null) throw response.ServerError.Error.ToException();
         return response.Documents;
     }
 }

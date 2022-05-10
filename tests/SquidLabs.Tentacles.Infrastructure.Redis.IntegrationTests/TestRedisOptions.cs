@@ -1,4 +1,3 @@
-using SquidLabs.Tentacles.Infrastructure.Redis;
 using SquidLabs.Tentacles.Infrastructure.Tests;
 
 namespace SquidLabs.Tentacles.Infrastructure.Redis.IntegrationTests;

@@ -12,6 +12,7 @@ public class MemoryCacheStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier,
 {
     /// <summary>
     /// </summary>
+    [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
     private static IMemoryCache _cache = null!;
 
     /// <summary>

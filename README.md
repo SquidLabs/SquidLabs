@@ -15,7 +15,9 @@ It is licensed under Apache License Version 2. The framework is opiniated, but i
 - [x] Domain Object Unit Tests
 - [ ] Domain Events
 - [ ] Specification
-- [ ] DataStore and ClientFactory
+- [x] DataStore and ClientFactory
+- [x] EventStore
+- [x] FileStore
 #### Application
 - [x] Repository
 - [x] Repository Unit Tests
@@ -27,9 +29,9 @@ It is licensed under Apache License Version 2. The framework is opiniated, but i
 #### Infrastructure
 - [x] DataStore and ClientFactory
 - [x] DataStore basic unit tests memory cache
-- [ ] DataStore basic unit tests file
+- [x] DataStore basic unit tests file
 - [ ] ClientFactory basic unit tests? memcache options? fileoptions?
-- [ ] DataStore Integration Tests
+- [x] DataStore Integration Tests
 - [ ] DataStore Dependency Injection Tests
 - [ ] ISearchable DataStore
 - [ ] Domain Event Messaging  Infrastructure
