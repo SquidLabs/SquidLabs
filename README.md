@@ -1,7 +1,6 @@
 SquidLabs - Tentacles
 ===========
-Tentacles and it's supporting libraries are an application framework for .NET.
-It is licensed under Apache License Version 2. The framework is opiniated, but it is flexible enough to allow you to pick and choose components relevant to your solution.
+Tentacles and it's supporting libraries are an application framework for .NET available under the Apache License Version 2. The framework is opiniated, but it is flexible enough to allow you to pick and choose components relevant to your solution.
 
 #### Presentation
 - [ ] React .Net + Api
