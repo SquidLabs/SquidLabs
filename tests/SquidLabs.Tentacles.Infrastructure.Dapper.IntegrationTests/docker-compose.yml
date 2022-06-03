@@ -1,7 +1,9 @@
 services:
-  sqldata:
+  tests:
+    build: .
+  mssql:
     image: "mcr.microsoft.com/mssql/serve:2019_latest"
-    container_name: elasticsearch
+    container_name: mssql
     environment:
       SA_PASSWORD: "insecure"
       ACCEPT_EULA: "Y"

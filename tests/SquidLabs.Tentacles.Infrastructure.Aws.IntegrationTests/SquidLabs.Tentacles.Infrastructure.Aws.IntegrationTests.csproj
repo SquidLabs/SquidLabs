@@ -6,14 +6,15 @@
         <IsPackable>false</IsPackable>
         <EnablePreviewFeatures>True</EnablePreviewFeatures>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.S3" Version="3.7.9.1" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0-preview.3.22175.4" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-        <PackageReference Include="Moq" Version="4.17.2" />
-        <PackageReference Include="XUnit" Version="2.4.1" />
+        <PackageReference Include="AWSSDK.S3" Version="3.7.9.1"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0-preview.3.22175.4"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0"/>
+        <PackageReference Include="Moq" Version="4.17.2"/>
+        <PackageReference Include="XUnit" Version="2.4.1"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -25,8 +26,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Aws\SquidLabs.Tentacles.Infrastructure.Aws.csproj" />
-        <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure\SquidLabs.Tentacles.Infrastructure.csproj" />
-        <ProjectReference Include="..\SquidLabs.Tentacles.Infrastructure.Tests\SquidLabs.Tentacles.Infrastructure.Tests.csproj" />
+        <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure.Aws\SquidLabs.Tentacles.Infrastructure.Aws.csproj"/>
+        <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure\SquidLabs.Tentacles.Infrastructure.csproj"/>
+        <ProjectReference Include="..\SquidLabs.Tentacles.Infrastructure.Tests\SquidLabs.Tentacles.Infrastructure.Tests.csproj"/>
     </ItemGroup>
 </Project>

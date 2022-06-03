@@ -1,6 +1,6 @@
 namespace SquidLabs.Tentacles.Infrastructure.Exceptions;
 
-public enum DataStoreOperationTypeEnum
+public enum StoreOperationTypeEnum
 {
     None = 0,
     Write = 1,

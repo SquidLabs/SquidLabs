@@ -1,12 +1,13 @@
 using Amazon.S3;
 using Amazon.S3.Model;
 using SquidLabs.Tentacles.Infrastructure.Abstractions;
+using SquidLabs.Tentacles.Infrastructure.Tests;
 
 namespace SquidLabs.Tentacles.Infrastructure.Aws;
 
 /// <summary>
 /// </summary>
-public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry : IFileEntry
+public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry : class, IFileEntry
 {
     /// <summary>
     /// </summary>
@@ -27,15 +28,23 @@ public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry
     /// <param name="cancellationToken"></param>
     public async Task WriteAsync(Guid id, TFileEntry fileEntry, CancellationToken cancellationToken = default)
     {
+        await using var inputStream = await fileEntry.ToStreamAsync(cancellationToken);
         var request = new PutObjectRequest
         {
-            InputStream = await fileEntry.ToStreamAsync(cancellationToken),
+            InputStream = inputStream,
             BucketName = _clientFactory.ClientOptions.BucketName,
             Key = id.ToString()
         };
 
-        await _clientFactory.GetClient().PutObjectAsync(request, cancellationToken).ConfigureAwait(false);
-        ;
+        try
+        {
+            await _clientFactory.GetClient().PutObjectAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+        catch (AmazonS3Exception amazonS3Exception)
+        {
+            throw amazonS3Exception.ToStoreException();
+        }
+
     }
 
     /// <summary>
@@ -45,15 +54,21 @@ public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry
     /// <returns></returns>
     public async Task<TFileEntry?> ReadAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var request = new GetObjectRequest
+        using var client = _clientFactory.GetClient();
+        
+        try
         {
-            BucketName = _clientFactory.ClientOptions.BucketName,
-            Key = id.ToString()
-        };
-
-        using var response = await _clientFactory.GetClient().GetObjectAsync(request, cancellationToken)
-            .ConfigureAwait(false);
-        return (TFileEntry?)await TFileEntry.FromStreamAsync(id.ToString(), response.ResponseStream, cancellationToken);
+            await using var fileStream = new FileStream(id.ToString(), FileMode.Create);
+            await using var response = await client.GetObjectStreamAsync(_clientFactory.ClientOptions.BucketName,
+                    id.ToString(), null, cancellationToken)
+                .ConfigureAwait(false);
+            await response.CopyToAsync(fileStream, cancellationToken);
+            return new TestFileEntry(id.ToString()) as TFileEntry;
+        }
+        catch (AmazonS3Exception amazonS3Exception)
+        {
+            throw amazonS3Exception.ToStoreException();
+        }
     }
 
     /// <summary>
@@ -72,14 +87,21 @@ public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry
     /// <param name="cancellationToken"></param>
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
+        using var client = _clientFactory.GetClient();
+        
         var deleteObjectRequest = new DeleteObjectRequest
         {
             BucketName = _clientFactory.ClientOptions.BucketName,
             Key = id.ToString()
         };
 
-        await _clientFactory.GetClient().DeleteObjectAsync(deleteObjectRequest, cancellationToken)
-            .ConfigureAwait(false);
-        ;
+        try
+        {
+            await client.DeleteObjectAsync(deleteObjectRequest, cancellationToken).ConfigureAwait(false);
+        }
+        catch (AmazonS3Exception amazonS3Exception)
+        {
+            throw amazonS3Exception.ToStoreException();
+        }
     }
 }

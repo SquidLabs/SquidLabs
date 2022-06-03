@@ -14,13 +14,13 @@ public class DapperSqlStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, T
 {
     /// <summary>
     /// </summary>
-    private readonly IClientFactory<TDataEntry, DapperSqlStoreOptions<TDataEntry>, IDbConnection> _connectionFactory;
+    private readonly IClientFactory<TDataEntry, IDapperSqlStoreOptions<TDataEntry>, IDbConnection> _connectionFactory;
 
     /// <summary>
     /// </summary>
     /// <param name="connectionFactory"></param>
     public DapperSqlStore(
-        IClientFactory<TDataEntry, DapperSqlStoreOptions<TDataEntry>, IDbConnection> connectionFactory)
+        IClientFactory<TDataEntry, IDapperSqlStoreOptions<TDataEntry>, IDbConnection> connectionFactory)
     {
         _connectionFactory = connectionFactory;
     }
@@ -64,7 +64,6 @@ public class DapperSqlStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, T
     /// <param name="cancellationToken"></param>
     public async Task DeleteAsync(TIdentifier id, CancellationToken cancellationToken = default)
     {
-        
         var options = _connectionFactory.ClientOptions;
         using var connection = _connectionFactory.GetClient();
         await connection

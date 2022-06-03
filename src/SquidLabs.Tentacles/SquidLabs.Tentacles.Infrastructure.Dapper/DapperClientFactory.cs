@@ -6,17 +6,17 @@ using SquidLabs.Tentacles.Infrastructure.Abstractions;
 namespace SquidLabs.Tentacles.Infrastructure.Dapper;
 
 public class
-    DbConnectionFactory<TDataEntry> : IClientFactory<TDataEntry, DapperSqlStoreOptions<TDataEntry>, IDbConnection>
+    DapperClientFactory<TDataEntry> : IClientFactory<TDataEntry, IDapperSqlStoreOptions<TDataEntry>, IDbConnection>
     where TDataEntry : IDataEntry
 {
-    private readonly IOptionsMonitor<DapperSqlStoreOptions<TDataEntry>> _connectionOptionsMonitor;
+    private readonly IOptionsMonitor<IDapperSqlStoreOptions<TDataEntry>> _connectionOptionsMonitor;
 
-    public DbConnectionFactory(IOptionsMonitor<DapperSqlStoreOptions<TDataEntry>> connectionOptionsMonitor)
+    public DapperClientFactory(IOptionsMonitor<IDapperSqlStoreOptions<TDataEntry>> connectionOptionsMonitor)
     {
         _connectionOptionsMonitor = connectionOptionsMonitor;
     }
 
-    public DapperSqlStoreOptions<TDataEntry> ClientOptions => _connectionOptionsMonitor.CurrentValue;
+    public IDapperSqlStoreOptions<TDataEntry> ClientOptions => _connectionOptionsMonitor.CurrentValue;
 
     public IDbConnection GetClient()
     {

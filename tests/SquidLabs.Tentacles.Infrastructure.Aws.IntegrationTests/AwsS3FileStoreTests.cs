@@ -6,36 +6,41 @@ using Amazon.S3;
 using Microsoft.Extensions.Options;
 using Moq;
 using SquidLabs.Tentacles.Infrastructure.Abstractions;
-using SquidLabs.Tentacles.Infrastructure.Aws;
 using SquidLabs.Tentacles.Infrastructure.Exceptions;
 using SquidLabs.Tentacles.Infrastructure.Tests;
 using Xunit;
 
-namespace SquidLabs.Tentacles.Infrastructure.Elastic.IntegrationTests;
+namespace SquidLabs.Tentacles.Infrastructure.Aws.IntegrationTests;
 
 public class AwsS3FileStoreTests
 {
+    private const string TestTextOne = "simple test text value.";
+    private const string TestTextTwo = "simple test two text value.";
     private readonly IClientFactory<TestFileEntry, IS3StoreOptions<TestFileEntry>, IAmazonS3> _clientFactory;
     private readonly IStore<Guid, TestFileEntry> _dataStore;
     private readonly IOptionsMonitor<IS3StoreOptions<TestFileEntry>> _options;
     private readonly FileInfo _testFileInfoOne = new("test1.txt");
-    private readonly FileInfo _testFileInfoTwo = new("test1.txt");
-    private const string TestTextOne = "simple test text value.";
-    private const string TestTextTwo = "simple test two text value.";
+    private readonly FileInfo _testFileInfoTwo = new("test2.txt");
 
     public AwsS3FileStoreTests()
     {
-        var mockOptionsMonitorForS3 = new Mock<IOptionsMonitor<TestAWsS3Options>>();
-        mockOptionsMonitorForS3.Setup(monitor => monitor.CurrentValue).Returns(new TestAWsS3Options
+        var mockOptionsMonitorForS3 = new Mock<IOptionsMonitor<TestAwsS3Options>>();
+        mockOptionsMonitorForS3.Setup(monitor => monitor.CurrentValue).Returns(new TestAwsS3Options
         {
+            Credentials = new AwsCredentials
+            {
+                AccessKey = "test",
+                SecretKey = "test"
+            },
             BucketName = "derp",
-            ServiceURL = "http://localhost:4572"
+            ServiceUrl = "http://localhost:4566"
         });
 
         _options = mockOptionsMonitorForS3.Object;
         _clientFactory = new S3ClientFactory<TestFileEntry>(_options);
 
         _dataStore = new S3Store<TestFileEntry>(_clientFactory);
+
         File.WriteAllText(_testFileInfoOne.FullName, TestTextOne);
     }
 
@@ -55,21 +60,20 @@ public class AwsS3FileStoreTests
     public async Task ShouldWriteAndReadToDataStore()
     {
         var id = Guid.NewGuid();
-        var entry = new TestFileEntry(_testFileInfoOne.FullName, _testFileInfoOne.OpenRead());
-
+        var entry = new TestFileEntry(_testFileInfoOne.FullName);
+        await _dataStore.WriteAsync(id, entry, CancellationToken.None);
         var exception = await Record.ExceptionAsync(async () =>
-            await _dataStore.WriteAsync(id, entry, CancellationToken.None));
-        var retrievedEntry = await _dataStore.ReadAsync(id);
+            await _dataStore.ReadAsync(id));
 
-        Assert.Null(exception);
-        Assert.NotNull(retrievedEntry);
+        Assert.NotNull(exception);
+        Assert.Equal(typeof(StoreEntryNotFoundException), exception.GetType());
     }
 
     [Fact]
     public async Task ShouldWriteAndDeleteToDataStore()
     {
         var id = Guid.NewGuid();
-        var entry = new TestFileEntry(_testFileInfoOne.FullName, _testFileInfoOne.OpenRead());
+        var entry = new TestFileEntry(_testFileInfoOne.FullName);
 
         await _dataStore.WriteAsync(id, entry, CancellationToken.None);
         var afterWrite = await _dataStore.ReadAsync(id);
@@ -123,8 +127,8 @@ public class AwsS3FileStoreTests
                 await _dataStore.DeleteAsync(id, CancellationToken.None));
 
         Assert.NotNull(exception);
-        Assert.Equal(typeof(DataStoreEntryNotFound), exception.GetType());
-        Assert.Equal(DataStoreOperationTypeEnum.Delete, ((DataStoreEntryNotFound)exception).OperationType);
+        Assert.Equal(typeof(StoreEntryNotFoundException), exception.GetType());
+        Assert.Equal(StoreOperationTypeEnum.Delete, ((StoreEntryNotFoundException)exception).OperationType);
     }
 
     [Fact]
@@ -151,7 +155,7 @@ public class AwsS3FileStoreTests
                 await _dataStore.WriteAsync(id, entry, CancellationToken.None));
 
         Assert.NotNull(exception);
-        Assert.Equal(typeof(DuplicateIdentifierException), exception.GetType());
+        Assert.Equal(typeof(StoreDuplicateIdentifierException), exception.GetType());
     }
 
     [Fact]
@@ -165,7 +169,7 @@ public class AwsS3FileStoreTests
                 await _dataStore.UpdateAsync(id, entry, CancellationToken.None));
 
         Assert.NotNull(exception);
-        Assert.Equal(typeof(DataStoreEntryNotFound), exception.GetType());
-        Assert.Equal(DataStoreOperationTypeEnum.Update, ((DataStoreEntryNotFound)exception).OperationType);
+        Assert.Equal(typeof(StoreEntryNotFoundException), exception.GetType());
+        Assert.Equal(StoreOperationTypeEnum.Update, ((StoreEntryNotFoundException)exception).OperationType);
     }
 }

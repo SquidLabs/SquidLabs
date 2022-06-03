@@ -3,33 +3,33 @@ using System.Runtime.Serialization;
 namespace SquidLabs.Tentacles.Infrastructure.Exceptions;
 
 [Serializable]
-public class ClientFactoryArgumentNullException : Exception
+public class StoreException : Exception
 {
     /// <summary>
-    ///     Initializes a new instance of the <see cref="ClientFactoryArgumentNullException" /> class.
+    ///     Initializes a new instance of the <see cref="StoreException" /> class.
     /// </summary>
     /// <param name="message">The error message.</param>
-    public ClientFactoryArgumentNullException(string message)
+    public StoreException(string message)
         : base(message)
     {
     }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="ClientFactoryArgumentNullException" /> class.
+    ///     Initializes a new instance of the <see cref="StoreException" /> class.
     /// </summary>
     /// <param name="message">The error message.</param>
     /// <param name="innerException">The inner exception.</param>
-    public ClientFactoryArgumentNullException(string message, Exception innerException)
+    public StoreException(string message, Exception innerException)
         : base(message, innerException)
     {
     }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="ClientFactoryArgumentNullException" /> class.
+    ///     Initializes a new instance of the <see cref="StoreException" /> class.
     /// </summary>
     /// <param name="info">The SerializationInfo.</param>
     /// <param name="context">The StreamingContext.</param>
-    public ClientFactoryArgumentNullException(SerializationInfo info, StreamingContext context)
+    public StoreException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
     }

@@ -64,7 +64,8 @@ public class AzureFileStore<TFileEntry> : IFileStore<Guid, TFileEntry> where TFi
     /// <param name="cancellationToken"></param>
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var response = await _clientFactory.GetClient().DeleteBlobAsync(id.ToString(), cancellationToken: cancellationToken)
+        var response = await _clientFactory.GetClient()
+            .DeleteBlobAsync(id.ToString(), cancellationToken: cancellationToken)
             .ConfigureAwait(false);
     }
 }

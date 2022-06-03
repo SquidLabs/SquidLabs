@@ -1,4 +1,6 @@
 services:
+  tests:
+    build: .
   mongo:
     image: "mongo:latest"
     container_name: mongo

@@ -1,5 +1,6 @@
 using Nest;
 using SquidLabs.Tentacles.Infrastructure.Abstractions;
+using SquidLabs.Tentacles.Infrastructure.Exceptions;
 
 namespace SquidLabs.Tentacles.Infrastructure.Elastic;
 
@@ -30,7 +31,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
     {
         var client = _clientFactory.GetClient();
         var response = await client.IndexDocumentAsync(entity, cancellationToken).ConfigureAwait(false);
-        if (response.ServerError is not null) throw response.ServerError.Error.ToException();
+        if (response.ServerError is not null) throw response.ServerError.Error.ToStoreException();
     }
 
     /// <summary>
@@ -43,7 +44,11 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
         var client = _clientFactory.GetClient();
         var resp = await client.GetAsync(DocumentPath<TDataEntry>.Id(id!.ToString()),
             ct: cancellationToken).ConfigureAwait(false);
-        return (resp.Found ? resp.Source : default)!;
+
+        if (!resp.Found)
+            throw new StoreEntryNotFoundException("Could not find Entry in Elastic", resp.ApiCall.OriginalException);
+
+        return resp.Source;
     }
 
     /// <summary>
@@ -57,7 +62,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
         var client = _clientFactory.GetClient();
         var response = await client.UpdateAsync<TDataEntry, object>(DocumentPath<TDataEntry>.Id(entity),
             i => i.Index(_clientFactory.ClientOptions.IndexField.ToLower()).Doc(entity), cancellationToken);
-        if (response.ServerError is not null) throw response.ServerError.Error.ToException();
+        if (response.ServerError is not null) throw response.ServerError.Error.ToStoreException();
     }
 
     /// <summary>
@@ -72,6 +77,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
             .ConfigureAwait(false);
         if (response.ServerError is not null)
         {
+            throw response.ServerError.Error.ToStoreException();
         }
     }
 
@@ -86,7 +92,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
         var client = _clientFactory.GetClient();
         var response = await client.SearchAsync<TDataEntry>(searchCriteria, cancellationToken)
             .ConfigureAwait(false);
-        if (response.ServerError is not null) throw response.ServerError.Error.ToException();
+        if (response.ServerError is not null) throw response.ServerError.Error.ToStoreException();
         return response.Documents;
     }
 }

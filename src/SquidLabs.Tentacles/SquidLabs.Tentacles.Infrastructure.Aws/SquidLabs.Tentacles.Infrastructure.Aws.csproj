@@ -9,13 +9,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SquidLabs.Tentacles.Infrastructure\SquidLabs.Tentacles.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\..\tests\SquidLabs.Tentacles.Infrastructure.Tests\SquidLabs.Tentacles.Infrastructure.Tests.csproj"/>
+        <ProjectReference Include="..\SquidLabs.Tentacles.Infrastructure\SquidLabs.Tentacles.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.3.33" />
-        <PackageReference Include="AWSSDK.S3" Version="3.7.9.1" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.3.33"/>
+        <PackageReference Include="AWSSDK.S3" Version="3.7.9.1"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0"/>
     </ItemGroup>
 
 </Project>

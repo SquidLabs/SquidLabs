@@ -15,17 +15,17 @@ namespace SquidLabs.Tentacles.Infrastructure.Azure.IntegrationTests;
 
 public class AzureBlobDataStoreTests
 {
+    private const string TestTextOne = "simple test text value.";
+    private const string TestTextTwo = "simple test two text value.";
     private readonly IOptionsMonitor<IAzureBlobOptions<TestFileEntry>> _azureBlobOptions;
 
     private readonly IClientFactory<TestFileEntry, IAzureBlobOptions<TestFileEntry>, BlobContainerClient>
         _clientFactory;
 
     private readonly IStore<Guid, TestFileEntry> _dataStore;
-    
+
     private readonly FileInfo _testFileInfoOne = new("test1.txt");
     private readonly FileInfo _testFileInfoTwo = new("test1.txt");
-    private const string TestTextOne = "simple test text value.";
-    private const string TestTextTwo = "simple test two text value.";
 
     public AzureBlobDataStoreTests()
     {
@@ -39,7 +39,7 @@ public class AzureBlobDataStoreTests
         _clientFactory = new AzureBlobClientFactory<TestFileEntry>(_azureBlobOptions);
 
         _dataStore = new AzureFileStore<TestFileEntry>(_clientFactory);
-        
+
         File.WriteAllText(_testFileInfoOne.FullName, TestTextOne);
     }
 
@@ -127,8 +127,8 @@ public class AzureBlobDataStoreTests
                 await _dataStore.DeleteAsync(id, CancellationToken.None));
 
         Assert.NotNull(exception);
-        Assert.Equal(typeof(DataStoreEntryNotFound), exception.GetType());
-        Assert.Equal(DataStoreOperationTypeEnum.Delete, ((DataStoreEntryNotFound)exception).OperationType);
+        Assert.Equal(typeof(StoreEntryNotFoundException), exception.GetType());
+        Assert.Equal(StoreOperationTypeEnum.Delete, ((StoreEntryNotFoundException)exception).OperationType);
     }
 
     [Fact]
@@ -155,7 +155,7 @@ public class AzureBlobDataStoreTests
                 await _dataStore.WriteAsync(id, entry, CancellationToken.None));
 
         Assert.NotNull(exception);
-        Assert.Equal(typeof(DuplicateIdentifierException), exception.GetType());
+        Assert.Equal(typeof(StoreDuplicateIdentifierException), exception.GetType());
     }
 
     [Fact]
@@ -169,7 +169,7 @@ public class AzureBlobDataStoreTests
                 await _dataStore.UpdateAsync(id, entry, CancellationToken.None));
 
         Assert.NotNull(exception);
-        Assert.Equal(typeof(DataStoreEntryNotFound), exception.GetType());
-        Assert.Equal(DataStoreOperationTypeEnum.Update, ((DataStoreEntryNotFound)exception).OperationType);
+        Assert.Equal(typeof(StoreEntryNotFoundException), exception.GetType());
+        Assert.Equal(StoreOperationTypeEnum.Update, ((StoreEntryNotFoundException)exception).OperationType);
     }
 }
