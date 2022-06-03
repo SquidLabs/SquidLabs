@@ -21,12 +21,11 @@ public class LocalFileStore<TFileEntry> : IFileStore<string, TFileEntry> where T
         await stream.CopyToAsync(destinationStream, cancellationToken).ConfigureAwait(false);
     }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="fileName"></param>
-/// <param name="cancellationToken"></param>
-/// <returns></returns>
+    /// <summary>
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<TFileEntry?> ReadAsync(string fileName, CancellationToken cancellationToken = default)
     {
         return (TFileEntry?)await TFileEntry.FromStreamAsync(fileName, new FileStream(fileName,

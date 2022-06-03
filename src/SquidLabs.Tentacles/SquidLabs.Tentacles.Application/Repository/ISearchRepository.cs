@@ -4,7 +4,6 @@ using SquidLabs.Tentacles.Domain.Specification;
 namespace SquidLabs.Tentacles.Application.Repository;
 
 /// <summary>
-/// 
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TKey"></typeparam>

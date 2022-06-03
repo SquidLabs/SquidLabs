@@ -7,13 +7,9 @@ namespace SquidLabs.Tentacles.Infrastructure.Aws;
 public interface IS3StoreOptions<TDataEntry> : IConnectionOptions<TDataEntry>
     where TDataEntry : IDataEntry
 {
-    /// <summary>
-    /// </summary>
     public string BucketName { get; set; }
-    
-    public string ServiceURL  { get; set; }
-
-    /// <summary>
-    /// </summary>
+    public string ServiceUrl { get; set; }
+    public bool UseHttp { get; set; }
+    public bool ForcePathStyle { get; set; }
     public IAwsCredentials Credentials { get; set; }
 }

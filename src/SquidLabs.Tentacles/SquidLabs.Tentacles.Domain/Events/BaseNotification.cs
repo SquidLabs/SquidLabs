@@ -9,7 +9,7 @@ public class BaseNotification<TEvent> : INotification<TEvent, Guid> where TEvent
     /// <summary>
     /// </summary>
     public Guid CorrelationId { get; }
-    
+
     /// <summary>
     /// </summary>
     public DateTime? ExpirationTime { get; }

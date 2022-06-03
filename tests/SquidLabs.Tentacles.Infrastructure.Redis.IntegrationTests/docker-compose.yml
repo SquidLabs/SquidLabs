@@ -2,6 +2,8 @@
 
 version: '2.3'
 services:
+  tests:
+    build: .
   redis:
     image: "redis:latest"
     container_name: redis

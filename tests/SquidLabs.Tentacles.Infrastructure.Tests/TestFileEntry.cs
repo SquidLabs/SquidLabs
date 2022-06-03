@@ -17,8 +17,7 @@ public class TestFileEntry : IFileEntry
     public TestFileEntry(string filePath, in Stream readStream)
     {
         _fileInfo = new FileInfo(filePath);
-        var writeStream = _fileInfo.OpenWrite();
-        readStream.CopyToAsync(writeStream);
+        readStream.CopyTo(_fileInfo.OpenWrite());
     }
 
 
@@ -30,6 +29,8 @@ public class TestFileEntry : IFileEntry
     public static async Task<IFileEntry> FromStreamAsync(string fileName, Stream stream,
         CancellationToken cancellationToken = default)
     {
-        return await Task.FromResult(new TestFileEntry(fileName, stream));
+        var file = new TestFileEntry(fileName);
+        await stream.CopyToAsync(file._fileInfo.OpenWrite(), cancellationToken);
+        return file;
     }
 }

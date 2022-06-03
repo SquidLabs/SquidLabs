@@ -27,7 +27,7 @@ public class MongoClientFactory<TDataEntry> : IClientFactory<TDataEntry, IMongoO
         }
         catch (ArgumentNullException ex)
         {
-            throw new ClientFactoryArgumentNullException(ex.Message, ex);
+            throw new StoreClientFactoryArgumentNullException(ex.Message, ex);
         }
     }
 }

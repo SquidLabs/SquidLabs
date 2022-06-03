@@ -1,14 +1,20 @@
-# this compose file will start local services the same as those running on appveyor CI for testing.
-
-version: '2.3'
 services:
+  tests:
+    build: .
   localstack:
     image: "localstack/localstack:latest"
     container_name: localstack
     environment:
       - AWS_DEFAULT_REGION=us-east-1
-      - EDGE_PORT=4566
       - SERVICES=dynamodb,s3
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    network_mode: bridge
     ports:
-      - '4566-4583:4566-4583'
-      - '8080:8080'
+      - "127.0.0.1:4510-4559:4510-4559"  # external service port range
+      - "127.0.0.1:4566:4566"            # LocalStack Edge Proxy
+    volumes:
+      - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

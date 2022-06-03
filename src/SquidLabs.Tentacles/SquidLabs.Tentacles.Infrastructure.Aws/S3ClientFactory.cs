@@ -13,7 +13,12 @@ public class S3ClientFactory<TDataEntry> : IClientFactory<TDataEntry, IS3StoreOp
     public S3ClientFactory(IOptionsMonitor<IS3StoreOptions<TDataEntry>> s3StoreOptionsMonitor)
     {
         _s3StoreOptionsMonitor = s3StoreOptionsMonitor;
-        _clientConfig = new AmazonS3Config();
+        _clientConfig = new AmazonS3Config
+        {
+            ServiceURL = _s3StoreOptionsMonitor.CurrentValue.ServiceUrl,
+            UseHttp = _s3StoreOptionsMonitor.CurrentValue.UseHttp,
+            ForcePathStyle = _s3StoreOptionsMonitor.CurrentValue.ForcePathStyle
+        };
     }
 
     public IS3StoreOptions<TDataEntry> ClientOptions => _s3StoreOptionsMonitor.CurrentValue;

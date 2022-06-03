@@ -1,7 +1,6 @@
 namespace SquidLabs.Tentacles.Infrastructure.Abstractions;
 
 /// <summary>
-/// 
 /// </summary>
 /// <typeparam name="TDataEntry"></typeparam>
 /// <typeparam name="TConnectionOptions"></typeparam>
@@ -11,12 +10,10 @@ public interface IClientFactory<TDataEntry, out TConnectionOptions, out TClient>
     where TDataEntry : IDataEntry
 {
     /// <summary>
-    /// 
     /// </summary>
     TConnectionOptions ClientOptions { get; }
-    
+
     /// <summary>
-    /// 
     /// </summary>
     /// <returns></returns>
     TClient GetClient();

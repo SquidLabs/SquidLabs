@@ -16,7 +16,6 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     private readonly IMapper<TKey, TDomainObject, IDataEntry> _mapper;
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="dataStore"></param>
     /// <param name="mapper"></param>
@@ -27,7 +26,6 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
@@ -39,7 +37,6 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="domainObject"></param>
     /// <param name="cancellationToken"></param>
@@ -52,7 +49,6 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="domainObject"></param>
     /// <param name="cancellationToken"></param>
@@ -65,7 +61,6 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="domainObject"></param>
     /// <param name="cancellationToken"></param>
@@ -76,7 +71,6 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     }
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>

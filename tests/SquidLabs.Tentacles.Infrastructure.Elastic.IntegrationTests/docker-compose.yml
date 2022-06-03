@@ -1,4 +1,6 @@
 services:
+  tests:
+    build: .
   elasticsearch:
     image: "elasticsearch:7.10.1"
     container_name: elasticsearch

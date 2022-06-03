@@ -1,7 +1,6 @@
 namespace SquidLabs.Tentacles.Infrastructure.Abstractions;
 
 /// <summary>
-/// 
 /// </summary>
 public interface IStoreNameFormatter
 {

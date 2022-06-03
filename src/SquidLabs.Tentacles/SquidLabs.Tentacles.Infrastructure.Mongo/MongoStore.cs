@@ -36,10 +36,9 @@ public class MongoStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, TData
         {
             await client.InsertOneAsync(content, null, cancellationToken).ConfigureAwait(false);
         }
-        catch (MongoWriteException ex)
+        catch (MongoWriteException exception)
         {
-            if (ex.WriteError.Category == ServerErrorCategory.DuplicateKey)
-                throw new DuplicateIdentifierException(ex.Message, ex);
+            throw exception.ToStoreException();
         }
     }
 
@@ -51,8 +50,18 @@ public class MongoStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, TData
     public async Task<TDataEntry?> ReadAsync(TIdentifier id, CancellationToken cancellationToken = default)
     {
         var query = Builders<TDataEntry>.Filter.Eq("Id", id);
-        return await (await _clientFactory.GetClientCollection().FindAsync(query, cancellationToken: cancellationToken)
-            .ConfigureAwait(false)).FirstOrDefaultAsync(cancellationToken);
+        var client = _clientFactory.GetClientCollection();
+
+        try
+        {
+            return await (await client
+                .FindAsync(query, cancellationToken: cancellationToken)
+                .ConfigureAwait(false)).SingleAsync(cancellationToken);
+        }
+        catch (MongoException exception)
+        {
+            throw exception.ToStoreException();
+        }
     }
 
     /// <summary>
@@ -62,12 +71,22 @@ public class MongoStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, TData
     /// <param name="cancellationToken"></param>
     public async Task UpdateAsync(TIdentifier id, TDataEntry entity, CancellationToken cancellationToken = default)
     {
+        var client = _clientFactory.GetClientCollection();
         var query = Builders<TDataEntry>.Filter.Eq("Id", id);
-        var result = await _clientFactory.GetClientCollection()
-            .ReplaceOneAsync(query, entity, new ReplaceOptions { IsUpsert = false }, cancellationToken)
-            .ConfigureAwait(false);
-        if (result.ModifiedCount == 0)
-            throw new DataStoreEntryNotFound("Could not find record to replace", DataStoreOperationTypeEnum.Update);
+
+        try
+        {
+            var result = await client
+                .ReplaceOneAsync(query, entity, new ReplaceOptions { IsUpsert = false }, cancellationToken)
+                .ConfigureAwait(false);
+            if (result.ModifiedCount == 0)
+                throw new StoreEntryNotFoundException("Could not find record to replace",
+                    StoreOperationTypeEnum.Update);
+        }
+        catch (Exception exception)
+        {
+            throw exception.ToStoreException();
+        }
     }
 
     /// <summary>
@@ -76,10 +95,20 @@ public class MongoStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, TData
     /// <param name="cancellationToken"></param>
     public async Task DeleteAsync(TIdentifier id, CancellationToken cancellationToken = default)
     {
+        var client = _clientFactory.GetClientCollection();
         var query = Builders<TDataEntry>.Filter.Eq("Id", id);
-        var result = await _clientFactory.GetClientCollection()
-            .DeleteOneAsync(query, new DeleteOptions(), cancellationToken).ConfigureAwait(false);
-        if (result.DeletedCount == 0)
-            throw new DataStoreEntryNotFound("Could not find record to replace", DataStoreOperationTypeEnum.Delete);
+
+        try
+        {
+            var result = await client
+                .DeleteOneAsync(query, new DeleteOptions(), cancellationToken).ConfigureAwait(false);
+            if (result.DeletedCount == 0)
+                throw new StoreEntryNotFoundException("Could not find record to replace",
+                    StoreOperationTypeEnum.Delete);
+        }
+        catch (Exception exception)
+        {
+            throw exception.ToStoreException();
+        }
     }
 }

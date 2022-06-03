@@ -8,14 +8,12 @@ public interface IMapper<TKey, TDomainObject, TDataRecord>
     where TDataRecord : IDataEntry
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="domainObject"></param>
     /// <returns></returns>
     TDataRecord? ConvertToDataStoreType(TDomainObject? domainObject);
-    
+
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="dataStoreEntry"></param>
     /// <returns></returns>
