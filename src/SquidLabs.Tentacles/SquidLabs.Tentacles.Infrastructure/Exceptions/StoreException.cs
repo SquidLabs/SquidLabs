@@ -30,7 +30,6 @@ public class StoreException : Exception
     /// <param name="info">The SerializationInfo.</param>
     /// <param name="context">The StreamingContext.</param>
     public StoreException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
     {
     }
 }

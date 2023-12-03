@@ -26,7 +26,7 @@ public class TestFileEntry : IFileEntry
         return await Task.FromResult(_fileInfo.OpenRead());
     }
 
-    public static async Task<IFileEntry> FromStreamAsync(string fileName, Stream stream,
+    public async Task<IFileEntry> FromStreamAsync(string fileName, Stream stream,
         CancellationToken cancellationToken = default)
     {
         var file = new TestFileEntry(fileName);

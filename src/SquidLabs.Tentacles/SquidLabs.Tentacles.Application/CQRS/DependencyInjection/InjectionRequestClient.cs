@@ -14,10 +14,10 @@ public class InjectionRequestClient<TRequest> : IRequestClient<TRequest>
         _logger = logger;
     }
 
-    public Task<IResponse<T>> GetResponse<T>(TRequest message, CancellationToken cancellationToken = default,
+    public Task<IResponse<T>> GetResponse<T>(TRequest request, CancellationToken cancellationToken = default,
         RequestTimeout timeout = default) where T : class
     {
-        _logger.LogInformation("Request Client calling handler for message", message);
+        _logger.LogInformation("Request Client calling handler for message");
 
         // Where does the pipeline go, in the handler?
         // before handler gets called we run through the DI pipeline (make it look like middleware?)
@@ -28,10 +28,10 @@ public class InjectionRequestClient<TRequest> : IRequestClient<TRequest>
         return Task.FromResult<IResponse<T>>(null!);
     }
 
-    public Task<Response<T1, T2>> GetResponse<T1, T2>(TRequest message, CancellationToken cancellationToken = default,
+    public Task<Response<T1, T2>> GetResponse<T1, T2>(TRequest request, CancellationToken cancellationToken = default,
         RequestTimeout timeout = default) where T1 : class where T2 : class
     {
-        _logger.LogInformation("Request Client calling handler for message", message);
+        _logger.LogInformation("Request Client calling handler for message");
 
         //IRequestHandlerContext<TRequest> context;
         //_requestHandler.Handle(context);

@@ -30,7 +30,6 @@ public class StoreClientFactoryArgumentNullException : Exception
     /// <param name="info">The SerializationInfo.</param>
     /// <param name="context">The StreamingContext.</param>
     public StoreClientFactoryArgumentNullException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
     {
     }
 }

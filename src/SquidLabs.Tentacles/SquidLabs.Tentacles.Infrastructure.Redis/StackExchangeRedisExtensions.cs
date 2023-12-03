@@ -11,8 +11,8 @@ public static class StackExchangeRedisExtensions
     public static async Task<T?> GetAsync<T>(this IDatabase cache, string key,
         CancellationToken cancellationToken = default)
     {
-        var item = await cache.StringGetAsync(key).WaitAsync(cancellationToken).ConfigureAwait(false);
-        return await DeserializeAsync<T>(item, cancellationToken).ConfigureAwait(false);
+        var item = await cache.StringGetAsync(key).WaitAsync(cancellationToken);
+        return await DeserializeAsync<T>(item!, cancellationToken).ConfigureAwait(false);
     }
 
     public static async Task SetAsync<T>(this IDatabase cache, string key, T value,

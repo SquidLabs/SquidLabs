@@ -62,7 +62,7 @@ public abstract class BaseConsoleHostedService : IHostedService
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         if (_process != null) await _process;
-        _logger.LogDebug("Stopped Application with exit code", _exitCode);
+        _logger.LogDebug("Stopped Application with exit code");
         Environment.ExitCode = _exitCode.GetValueOrDefault(-1);
     }
 
