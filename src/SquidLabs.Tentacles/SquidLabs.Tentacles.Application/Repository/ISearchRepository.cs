@@ -11,5 +11,6 @@ public interface ISearchRepository<TDomainObject, TKey, TSpecification> : IRepos
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task<IReadOnlyCollection<TDomainObject>> SearchAsync(TSpecification specification, CancellationToken cancellationToken = default);
+    Task<IReadOnlyCollection<TDomainObject>> SearchAsync(TSpecification specification,
+        CancellationToken cancellationToken = default);
 }

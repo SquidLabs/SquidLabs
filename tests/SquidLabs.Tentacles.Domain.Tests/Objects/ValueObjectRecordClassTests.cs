@@ -34,6 +34,7 @@ public class ValueObjectRecordClassTests
 
         public override Guid GetKey()
         {
+            return new Guid();
         }
     }
 

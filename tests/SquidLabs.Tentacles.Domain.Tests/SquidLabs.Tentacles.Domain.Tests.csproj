@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\SquidLabs.Hashing\SquidLabs.Hashing.csproj" />
-      <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Domain\SquidLabs.Tentacles.Domain.csproj" />
+        <ProjectReference Include="..\..\src\SquidLabs.Hashing\SquidLabs.Hashing.csproj" />
+        <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Domain\SquidLabs.Tentacles.Domain.csproj" />
     </ItemGroup>
 </Project>

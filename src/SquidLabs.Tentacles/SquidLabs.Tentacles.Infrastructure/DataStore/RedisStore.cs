@@ -6,8 +6,8 @@ using StackExchange.Redis;
 
 namespace SquidLabs.Tentacles.Infrastructure.DataStore;
 
-public class RedisStore<TKey, TEntity> : IDataStore<TKey, TEntity>
-    where TEntity : class
+public class RedisStore<TKey, TEntry> : IDataStore<TKey, TEntry>
+    where TEntry : class, IDataEntry
 {
     private readonly ConnectionMultiplexer _connectionMultiplexer;
     private readonly IDatabase _database;
@@ -20,24 +20,24 @@ public class RedisStore<TKey, TEntity> : IDataStore<TKey, TEntity>
         _database = _connectionMultiplexer.GetDatabase(1);
     }
 
-    public async Task WriteAsync(TKey identifier, TEntity content, CancellationToken cancellationToken)
+    public async Task WriteAsync(TKey id, TEntry content, CancellationToken cancellationToken)
     {
-        await _database.SetAsync(identifier.ToString(), content, cancellationToken);
+        await _database.SetAsync(id.ToString(), content, cancellationToken);
     }
 
-    public async Task<TEntity> ReadAsync(TKey identifier, CancellationToken cancellationToken)
+    public async Task<TEntry> ReadAsync(TKey id, CancellationToken cancellationToken)
     {
-        return await _database.GetAsync<TEntity>(identifier.ToString());
+        return await _database.GetAsync<TEntry>(id.ToString());
     }
 
-    public async Task UpdateAsync(TKey identifier, TEntity content, CancellationToken cancellationToken)
+    public async Task UpdateAsync(TKey id, TEntry content, CancellationToken cancellationToken)
     {
-        await WriteAsync(identifier, content, cancellationToken);
+        await WriteAsync(id, content, cancellationToken);
     }
 
-    public async Task DeleteAsync(TKey identifier, CancellationToken cancellationToken)
+    public async Task DeleteAsync(TKey id, CancellationToken cancellationToken)
     {
-        await _database.KeyDeleteAsync(new RedisKey(identifier.ToString())).WaitAsync(cancellationToken)
+        await _database.KeyDeleteAsync(new RedisKey(id.ToString())).WaitAsync(cancellationToken)
             .ConfigureAwait(false);
     }
 }

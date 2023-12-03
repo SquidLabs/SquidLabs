@@ -16,6 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure\SquidLabs.Tentacles.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\src\SquidLabs.Tentacles\SquidLabs.Tentacles.Infrastructure\SquidLabs.Tentacles.Infrastructure.csproj" />
     </ItemGroup>
 </Project>
