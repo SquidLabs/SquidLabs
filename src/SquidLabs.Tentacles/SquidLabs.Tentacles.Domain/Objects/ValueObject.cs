@@ -2,7 +2,7 @@ namespace SquidLabs.Tentacles.Domain.Objects;
 
 /// <summary>
 /// </summary>
-public abstract record BaseValueObject : IValueObject<Guid>
+public abstract record ValueObject : IValueObject<Guid>
 {
     /// <summary>
     /// </summary>
@@ -10,15 +10,14 @@ public abstract record BaseValueObject : IValueObject<Guid>
     /// <returns></returns>
     public virtual bool Equals(IDomainObject<Guid>? other)
     {
-        return other is not null && GetKey() == other.GetKey();
+        return other is not null && Id == other.Id;
     }
 
     /// <summary>
     /// </summary>
     /// <returns></returns>
     public abstract Guid GetKey();
+    
 
-    /// <summary>
-    /// </summary>
-    public Guid Key { get; protected init; }
+    public Guid Id { get; }
 }

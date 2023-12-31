@@ -1,10 +1,8 @@
-using SquidLabs.Tentacles.Domain.Objects;
-
-namespace SquidLabs.Tentacles.Domain.Events;
+namespace SquidLabs.Tentacles.Domain.Objects;
 
 /// <summary>
 /// </summary>
-public class BaseDomainEvent : IDomainEvent<Guid>
+public class AggregateRoot : IAggregateRoot<Guid>
 {
     /// <summary>
     /// </summary>
@@ -12,7 +10,7 @@ public class BaseDomainEvent : IDomainEvent<Guid>
     /// <returns></returns>
     public bool Equals(IDomainObject<Guid>? other)
     {
-        return other is not null && GetKey().Equals(other.GetKey());
+        return other is not null && GetKey() == other.GetKey();
     }
 
     /// <summary>
@@ -20,10 +18,10 @@ public class BaseDomainEvent : IDomainEvent<Guid>
     /// <returns></returns>
     public Guid GetKey()
     {
-        return CorrelationId;
+        return Id;
     }
 
     /// <summary>
     /// </summary>
-    public Guid CorrelationId { get; init; }
+    public Guid Id { get; set; }
 }

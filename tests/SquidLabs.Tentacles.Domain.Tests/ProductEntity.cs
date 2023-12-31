@@ -2,7 +2,7 @@ using SquidLabs.Tentacles.Domain.Objects;
 
 namespace SquidLabs.Tentacles.Domain.Tests;
 
-public class ProductEntity : BaseEntity
+public class ProductEntity : Entity
 {
     public string Name { get; set; } = null!;
     public string ModelNumber { get; set; } = null!;

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace SquidLabs.Tentacles.Domain.Tests.Objects;
 
-public class BaseEntityTests
+public class EntityTests
 {
     [Fact]
     public void ShouldNotBeEqualWithSameInnerValue()

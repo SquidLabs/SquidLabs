@@ -6,7 +6,7 @@ namespace SquidLabs.Tentacles.Domain.Tests.Objects;
 
 public class ValueObjectRecordClassTests
 {
-    public record Address : BaseValueObject
+    public record Address : ValueObject
     {
         public Address(string addressLine1, string? addressLine2, string? building, string city, string countryRegion,
             string? floorLevel, int postalCode, string stateProvince)

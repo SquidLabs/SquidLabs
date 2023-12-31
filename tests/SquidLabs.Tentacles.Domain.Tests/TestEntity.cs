@@ -3,7 +3,7 @@ using SquidLabs.Tentacles.Domain.Objects;
 
 namespace SquidLabs.Tentacles.Domain.Tests;
 
-public class TestEntity : BaseEntity
+public class TestEntity : Entity
 {
     public TestEntity(string value)
     {
