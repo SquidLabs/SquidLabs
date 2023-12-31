@@ -6,14 +6,14 @@
         <IsPackable>false</IsPackable>
         <RootNamespace>SquidLabs.Tentacles.Domain.Tests</RootNamespace>
         <AssemblyName>SquidLabs.Tentacles.Domain.Tests</AssemblyName>
-        <EnablePreviewFeatures>True</EnablePreviewFeatures>
+        
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-        <PackageReference Include="xunit" Version="2.6.2" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="xunit" Version="2.6.2"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -23,7 +23,7 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Update="Nerdbank.GitVersioning">
-          <Version>3.6.133</Version>
+            <Version>3.6.133</Version>
         </PackageReference>
     </ItemGroup>
 

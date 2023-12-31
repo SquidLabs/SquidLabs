@@ -9,7 +9,7 @@ namespace SquidLabs.Tentacles.Infrastructure;
 /// <typeparam name="TDataEntry"></typeparam>
 public class MemoryCacheStore<TIdentifier, TDataEntry> : IDataStore<TIdentifier, TDataEntry>
     where TDataEntry : IDataEntry
-    where TIdentifier: notnull
+    where TIdentifier : notnull
 {
     /// <summary>
     /// </summary>

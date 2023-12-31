@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 using static SquidLabs.Hashing.SipHash;
 
@@ -15,7 +14,7 @@ public class HashTest
         var key = Enumerable.Range(0, 16).Select(Convert.ToByte).ToArray();
         var message = new byte[Vectors.TestValues.Length];
         var results = new bool[Vectors.TestValues.Length];
-        
+
         // Act
         for (var i = 0; i < Vectors.TestValues.Length; i++)
         {
@@ -23,14 +22,14 @@ public class HashTest
 
             // Compute the tag
             var tag = ComputeHash128(message[..i], key);
-            
+
             // Get the target tag
             var targetTag = Vectors.TestValues[i].Select(x => (byte)x).ToArray();
-     
+
             // Store the result of the assertion
             results[i] = tag.SequenceEqual(targetTag);
         }
-        
+
         // Assert
         Assert.DoesNotContain(false, results);
     }

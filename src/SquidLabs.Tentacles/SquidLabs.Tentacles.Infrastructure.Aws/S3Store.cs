@@ -44,7 +44,6 @@ public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry
         {
             throw amazonS3Exception.ToStoreException();
         }
-
     }
 
     /// <summary>
@@ -55,7 +54,7 @@ public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry
     public async Task<TFileEntry?> ReadAsync(Guid id, CancellationToken cancellationToken = default)
     {
         using var client = _clientFactory.GetClient();
-        
+
         try
         {
             await using var fileStream = new FileStream(id.ToString(), FileMode.Create);
@@ -88,7 +87,7 @@ public class S3Store<TFileEntry> : IFileStore<Guid, TFileEntry> where TFileEntry
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         using var client = _clientFactory.GetClient();
-        
+
         var deleteObjectRequest = new DeleteObjectRequest
         {
             BucketName = _clientFactory.ClientOptions.BucketName,

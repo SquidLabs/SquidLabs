@@ -28,7 +28,7 @@ public class LocalFileStore<TFileEntry> : IFileStore<string, TFileEntry> where T
     /// <returns></returns>
     public async Task<TFileEntry?> ReadAsync(string fileName, CancellationToken cancellationToken = default)
     {
-        return (TFileEntry?)await TFileEntry.FromStreamAsync<TFileEntry>(fileName, new FileStream(fileName,
+        return await TFileEntry.FromStreamAsync<TFileEntry>(fileName, new FileStream(fileName,
             FileMode.Open, FileAccess.Read, FileShare.Read,
             4096, true), cancellationToken).ConfigureAwait(false);
     }

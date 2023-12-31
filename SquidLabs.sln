@@ -12,11 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Linq.Extensions", "src\SquidLabs.Linq.Extensions\SquidLabs.Linq.Extensions.csproj", "{B0CC1FBF-C7AE-4402-90AA-03D714A63AE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Linq.Extenstions.Test", "tests\SquidLabs.Linq.Extenstions.Test\SquidLabs.Linq.Extenstions.Test.csproj", "{2902C6D9-C187-4E41-9D1F-8A5D5ED430BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Linq.Extensions.Tests", "tests\SquidLabs.Linq.Extensions.Tests\SquidLabs.Linq.Extensions.Tests.csproj", "{2902C6D9-C187-4E41-9D1F-8A5D5ED430BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Domain.Tests", "tests\SquidLabs.Tentacles.Domain.Tests\SquidLabs.Tentacles.Domain.Tests.csproj", "{A8BED3F5-24A2-47FE-BDB8-E9F0339045E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Analyzers", "src\SquidLabs.Analyzers\SquidLabs.Analyzers.csproj", "{3CCFCB83-263E-462C-AAE7-196C3A21E6C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Domain.Analyzers", "src\SquidLabs.Tentacles.Domain.Analyzers\SquidLabs.Tentacles.Domain.Analyzers.csproj", "{3CCFCB83-263E-462C-AAE7-196C3A21E6C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Hashing", "src\SquidLabs.Hashing\SquidLabs.Hashing.csproj", "{F5D75C82-E506-4994-990F-EA716731D5E9}"
 EndProject
@@ -59,6 +59,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Infrastructure.Azure.IntegrationTests", "tests\SquidLabs.Tentacles.Infrastructure.Azure.IntegrationTests\SquidLabs.Tentacles.Infrastructure.Azure.IntegrationTests.csproj", "{69A861EA-7B5D-4939-B66F-DA30B9463388}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Task.Extensions", "src\SquidLabs.Task.Extensions\SquidLabs.Task.Extensions.csproj", "{99639C96-B5C0-439F-A884-9B2D9905C279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquidLabs.Tentacles.Domain.Analyzers.Tests", "tests\SquidLabs.Tentacles.Domain.Analyzers.Tests\SquidLabs.Tentacles.Domain.Analyzers.Tests.csproj", "{84ED2930-2538-43B8-9450-4E120EDC4F1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -174,6 +176,10 @@ Global
 		{99639C96-B5C0-439F-A884-9B2D9905C279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99639C96-B5C0-439F-A884-9B2D9905C279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99639C96-B5C0-439F-A884-9B2D9905C279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84ED2930-2538-43B8-9450-4E120EDC4F1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84ED2930-2538-43B8-9450-4E120EDC4F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84ED2930-2538-43B8-9450-4E120EDC4F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84ED2930-2538-43B8-9450-4E120EDC4F1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C0534AA3-0949-4184-AC6D-69CA20CB7B72} = {435BC315-6663-40B9-BB39-C078BB026A73}
@@ -199,5 +205,7 @@ Global
 		{F6F4879C-A65F-45FB-B947-CB49840D8DDD} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
 		{B2374467-C8F5-4585-A7B4-ABE3400FEE99} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
 		{69A861EA-7B5D-4939-B66F-DA30B9463388} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
+		{3CCFCB83-263E-462C-AAE7-196C3A21E6C1} = {D76459DE-BBDE-4CC5-A34F-5FDD8F46E421}
+		{84ED2930-2538-43B8-9450-4E120EDC4F1C} = {ED903E93-1577-4EA0-B317-FCD1D0E9B8CE}
 	EndGlobalSection
 EndGlobal

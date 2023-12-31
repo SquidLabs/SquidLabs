@@ -75,10 +75,7 @@ public class ElasticSearchStore<TIdentifier, TDataEntry, TSearchCriteria>
         var client = _clientFactory.GetClient();
         var response = await client.DeleteAsync(DocumentPath<TDataEntry>.Id(id!.ToString()), ct: cancellationToken)
             .ConfigureAwait(false);
-        if (response.ServerError is not null)
-        {
-            throw response.ServerError.Error.ToStoreException();
-        }
+        if (response.ServerError is not null) throw response.ServerError.Error.ToStoreException();
     }
 
     /// <summary>

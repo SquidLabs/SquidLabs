@@ -6,7 +6,7 @@ namespace SquidLabs.Tentacles.Infrastructure.Abstractions;
 /// <typeparam name="TIdentifier">Identity field for the underlying data store</typeparam>
 /// <typeparam name="TEntry">Data to store under the specified Id</typeparam>
 /// <typeparam name="TSearchCriteria">Search criteria in the underlying store/library format</typeparam>
-public interface ISearchableDataStore<TIdentifier, TEntry, in TSearchCriteria> : IDataStore<TIdentifier, TEntry>
+public interface ISearchableDataStore<in TIdentifier, TEntry, in TSearchCriteria> : IDataStore<TIdentifier, TEntry>
     where TEntry : IDataEntry
 {
     /// <summary>

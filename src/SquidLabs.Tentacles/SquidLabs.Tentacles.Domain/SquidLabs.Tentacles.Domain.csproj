@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>SquidLabs.Tentacles.Domain</RootNamespace>
-        <EnablePreviewFeatures>True</EnablePreviewFeatures>
+        
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
@@ -14,8 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Update="Nerdbank.GitVersioning">
-        <Version>3.6.133</Version>
-      </PackageReference>
+        <PackageReference Update="Nerdbank.GitVersioning">
+            <Version>3.6.133</Version>
+        </PackageReference>
     </ItemGroup>
 </Project>

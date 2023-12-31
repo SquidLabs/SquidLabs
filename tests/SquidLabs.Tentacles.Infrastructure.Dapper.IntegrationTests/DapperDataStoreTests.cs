@@ -14,16 +14,13 @@ namespace SquidLabs.Tentacles.Infrastructure.Dapper.IntegrationTests;
 public class DapperDataStoreTests
 {
     private readonly IClientFactory<TestDataEntry, IDapperSqlStoreOptions<TestDataEntry>, IDbConnection> _clientFactory;
-    private readonly IDataStore<Guid, TestDataEntry> _dataStore;
     private readonly IOptionsMonitor<IDapperSqlStoreOptions<TestDataEntry>> _dapperOptions;
+    private readonly IDataStore<Guid, TestDataEntry> _dataStore;
 
     public DapperDataStoreTests()
     {
         var mockOptionsMonitorForElastic = new Mock<IOptionsMonitor<TestDapperOptions>>();
-        mockOptionsMonitorForElastic.Setup(monitor => monitor.CurrentValue).Returns(new TestDapperOptions()
-        {
-    
-        });
+        mockOptionsMonitorForElastic.Setup(monitor => monitor.CurrentValue).Returns(new TestDapperOptions());
 
         _dapperOptions = mockOptionsMonitorForElastic.Object;
         _clientFactory = new DapperClientFactory<TestDataEntry>(_dapperOptions);

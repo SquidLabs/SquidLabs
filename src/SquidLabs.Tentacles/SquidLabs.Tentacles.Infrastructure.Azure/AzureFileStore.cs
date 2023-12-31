@@ -43,7 +43,7 @@ public class AzureFileStore<TFileEntry> : IFileStore<Guid, TFileEntry> where TFi
     {
         var blob = _clientFactory.GetBlobClient(id.ToString());
         var result = await blob.DownloadStreamingAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-        return (TFileEntry?)await TFileEntry.FromStreamAsync<TFileEntry>(id.ToString(), result.Value.Content, cancellationToken);
+        return await TFileEntry.FromStreamAsync<TFileEntry>(id.ToString(), result.Value.Content, cancellationToken);
     }
 
     /// <summary>

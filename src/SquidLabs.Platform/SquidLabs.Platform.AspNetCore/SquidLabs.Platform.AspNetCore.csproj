@@ -7,14 +7,14 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>SquidLabs.Platform.AspNetCore</PackageId>
         <RootNamespace>SquidLabs.Platform.WebApi</RootNamespace>
-        <EnablePreviewFeatures>True</EnablePreviewFeatures>
+        
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Update="Nerdbank.GitVersioning">
-        <Version>3.6.133</Version>
-      </PackageReference>
+        <PackageReference Update="Nerdbank.GitVersioning">
+            <Version>3.6.133</Version>
+        </PackageReference>
     </ItemGroup>
 
 </Project>

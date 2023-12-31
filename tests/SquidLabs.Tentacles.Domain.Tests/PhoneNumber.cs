@@ -46,6 +46,6 @@ internal record struct PhoneNumber : IValueObject<Guid>
 
     public override string ToString()
     {
-        return $"{CountryCode} {NationalNumber.ToString("{0:(###) ###-####}")} {Extension}";
+        return $"{CountryCode} {NationalNumber:{{0:(###) ###-####}}} {Extension}";
     }
 }

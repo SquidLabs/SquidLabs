@@ -2,7 +2,7 @@ namespace SquidLabs.Tentacles.Domain.Objects;
 
 /// <summary>
 /// </summary>
-public class BaseAggregateRoot : IAggregateRoot<Guid>
+public class gatBaseAggregateRoot : IAggregateRoot<Guid>
 {
     /// <summary>
     /// </summary>

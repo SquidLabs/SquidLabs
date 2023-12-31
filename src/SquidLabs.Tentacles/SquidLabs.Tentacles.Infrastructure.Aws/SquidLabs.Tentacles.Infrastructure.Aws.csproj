@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <EnablePreviewFeatures>True</EnablePreviewFeatures>
+        
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
@@ -14,11 +14,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.300.12" />
-        <PackageReference Include="AWSSDK.S3" Version="3.7.304.1" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.300.12"/>
+        <PackageReference Include="AWSSDK.S3" Version="3.7.304.1"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0"/>
         <PackageReference Update="Nerdbank.GitVersioning">
-          <Version>3.6.133</Version>
+            <Version>3.6.133</Version>
         </PackageReference>
     </ItemGroup>
 

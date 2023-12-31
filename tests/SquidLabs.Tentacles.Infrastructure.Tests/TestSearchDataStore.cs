@@ -10,7 +10,7 @@ namespace SquidLabs.Tentacles.Infrastructure.Tests;
 
 public class
     TestSearchDataStore<TIdentifier, TDataEntry, TSearchCriteria> : ISearchableDataStore<TIdentifier, TDataEntry,
-        TSearchCriteria>
+    TSearchCriteria>
     where TSearchCriteria : TestSearchCriteria
     where TDataEntry : TestDataEntry, IDataEntry
     where TIdentifier : notnull
