@@ -9,17 +9,17 @@ namespace SquidLabs.Tentacles.Application.Repository;
 // TODO: Retry Policy
 // TODO: Locking
 // TODO: Versioning
-public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainObject, TKey>
-    where TDomainObject : class, IDomainObject<TKey>
+public abstract class BaseRepository<TDomainObject, TId> : IRepository<TDomainObject, TId>
+    where TDomainObject : class, IDomainObject<TId> where TId : IEquatable<TId>
 {
-    private readonly IDataStore<TKey, IDataEntry> _dataStore;
-    private readonly IMapper<TKey, TDomainObject, IDataEntry> _mapper;
+    private readonly IDataStore<TId, IDataEntry> _dataStore;
+    private readonly IMapper<TId, TDomainObject, IDataEntry> _mapper;
 
     /// <summary>
     /// </summary>
     /// <param name="dataStore"></param>
     /// <param name="mapper"></param>
-    protected BaseRepository(IDataStore<TKey, IDataEntry> dataStore, IMapper<TKey, TDomainObject, IDataEntry> mapper)
+    protected BaseRepository(IDataStore<TId, IDataEntry> dataStore, IMapper<TId, TDomainObject, IDataEntry> mapper)
     {
         _dataStore = dataStore;
         _mapper = mapper;
@@ -30,7 +30,7 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<TDomainObject?> GetAsync(TKey id, CancellationToken cancellationToken = default)
+    public async Task<TDomainObject?> GetAsync(TId id, CancellationToken cancellationToken = default)
     {
         var response = await _dataStore.ReadAsync(id, cancellationToken).ConfigureAwait(false);
         return _mapper.ConvertFromDataStoreType(response);
@@ -45,7 +45,7 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     {
         var record = _mapper.ConvertToDataStoreType(domainObject);
         if (record != null)
-            await _dataStore.WriteAsync(domainObject.GetKey(), record, cancellationToken).ConfigureAwait(false);
+            await _dataStore.WriteAsync(domainObject.Id, record, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     {
         var record = _mapper.ConvertToDataStoreType(domainObject);
         if (record != null)
-            await _dataStore.UpdateAsync(domainObject.GetKey(), record, cancellationToken).ConfigureAwait(false);
+            await _dataStore.UpdateAsync(domainObject.Id, record, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -67,14 +67,14 @@ public abstract class BaseRepository<TDomainObject, TKey> : IRepository<TDomainO
     public async Task DeleteAsync(TDomainObject domainObject,
         CancellationToken cancellationToken = default)
     {
-        await _dataStore.DeleteAsync(domainObject.GetKey(), cancellationToken).ConfigureAwait(false);
+        await _dataStore.DeleteAsync(domainObject.Id, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
-    public async Task DeleteAsync(TKey id, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(TId id, CancellationToken cancellationToken = default)
     {
         await _dataStore.DeleteAsync(id, cancellationToken).ConfigureAwait(false);
     }

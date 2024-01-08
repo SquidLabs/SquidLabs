@@ -2,22 +2,13 @@ namespace SquidLabs.Tentacles.Domain.Objects;
 
 /// <summary>
 /// </summary>
-public abstract record ValueObject : IValueObject<Guid>
+public abstract record ValueObject<TId> : IValueObject<TId> where TId : IEquatable<TId>
 {
-    /// <summary>
-    /// </summary>
-    /// <param name="other"></param>
-    /// <returns></returns>
-    public virtual bool Equals(IDomainObject<Guid>? other)
+    public virtual bool Equals(IDomainObject<TId>? other)
     {
-        return other is not null && Id == other.Id;
+        return other is IValueObject<TId> && EqualityComparer<TId>.Default.Equals(Id, other.Id);
     }
 
-    /// <summary>
-    /// </summary>
-    /// <returns></returns>
-    public abstract Guid GetKey();
-    
-
-    public Guid Id { get; }
+    public TId Id { get; init; } = default!;
+    public abstract TId GetValueHashCode();
 }

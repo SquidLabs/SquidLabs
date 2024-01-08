@@ -6,10 +6,10 @@ namespace SquidLabs.Tentacles.Domain.Objects;
 ///     An interface for SquidLabs.Tentacles.Domain Driven Design Entity
 ///     Extend this with another interface or make a base class based on your needs.
 /// </summary>
-public interface IEntity<TKey> : IDomainObject<TKey> where TKey : notnull
+public interface IEntity<TId> : IDomainObject<TId> where TId : notnull, IEquatable<TId>
 {
-    void AddDomainEvent(IDomainEvent<TKey> domainEvent);
-    void RemoveDomainEvent(IDomainEvent<TKey> domainEvent);
+    new TId Id { get; set; }
+    void AddDomainEvent(IDomainEvent<TId> domainEvent);
+    void RemoveDomainEvent(IDomainEvent<TId> domainEvent);
     void ClearDomainEvents();
-
 }

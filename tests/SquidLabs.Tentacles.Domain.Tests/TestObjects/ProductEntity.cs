@@ -1,8 +1,9 @@
+using System;
 using SquidLabs.Tentacles.Domain.Objects;
 
 namespace SquidLabs.Tentacles.Domain.Tests;
 
-public class ProductEntity : Entity
+public class ProductEntity : Entity<Guid>
 {
     public string Name { get; set; } = null!;
     public string ModelNumber { get; set; } = null!;

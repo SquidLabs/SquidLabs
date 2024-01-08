@@ -7,7 +7,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>SquidLabs.Platform.AspNetCore</PackageId>
         <RootNamespace>SquidLabs.Platform.WebApi</RootNamespace>
-        
+
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 

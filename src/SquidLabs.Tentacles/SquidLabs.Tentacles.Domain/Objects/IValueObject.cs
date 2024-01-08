@@ -6,10 +6,8 @@ namespace SquidLabs.Tentacles.Domain.Objects;
 ///     this Interface.
 ///     Extend this with another interface or make a base interface based on your needs.
 /// </summary>
-public interface IValueObject<TKey> : IDomainObject<TKey>
+public interface IValueObject<TId> : IDomainObject<TId> where TId : IEquatable<TId>
 {
-    /// <summary>
-    ///     The resulting HashKey
-    /// </summary>
-    public TKey Key { get; }
+    new TId Id { get; init; }
+    TId GetValueHashCode();
 }

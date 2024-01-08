@@ -1,6 +1,6 @@
 namespace SquidLabs.Tentacles.Domain.Tests;
 
-public enum CountryCodes
+public enum CountryCodesEnum
 {
     Us = 1
 }

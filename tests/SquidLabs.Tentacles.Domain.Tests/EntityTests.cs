@@ -4,56 +4,32 @@ using Xunit;
 
 namespace SquidLabs.Tentacles.Domain.Tests.Objects;
 
-public class DomainObjectImplementationGuid : IDomainObject<Guid>
-{
-    public Guid Id { get; set; }
-
-    public bool Equals(IDomainObject<Guid>? other)
-    {
-        return GetKey().Equals(other?.GetKey());
-    }
-
-    public Guid GetKey()
-    {
-        return Id;
-    }
-}
-
-public class DomainObjectImplementationInt : IDomainObject<int>
-{
-    public int Id { get; set; }
-
-    public bool Equals(IDomainObject<int>? other)
-    {
-        return GetKey().Equals(other?.GetKey());
-    }
-
-    public int GetKey()
-    {
-        return Id;
-    }
-}
-
-public class DomainObjectTests
+public class EntityTests
 {
     [Fact]
-    public void ShouldBeEqualGuidIdWithDefaultNew()
+    public void ShouldNotBeEqualWithSameInnerValue()
     {
-        IDomainObject<Guid> d1 = new DomainObjectImplementationGuid();
-        IDomainObject<Guid> d2 = new DomainObjectImplementationGuid();
-        Assert.Equal(d1, d1);
+        var t1 = new TestEntity("value");
+        var t2 = new TestEntity("value");
+        Assert.NotEqual(t1, t2);
     }
 
     [Fact]
-    public void ShouldBeEqualGuidIdWhenBothAreInitialized()
+    public void ShouldBeNotBeReferenceEqual()
     {
-        var testValue1 = Guid.NewGuid();
-        var testValue2 = new Guid(testValue1.ToString());
-        IDomainObject<Guid> d1 = new DomainObjectImplementationGuid { Id = testValue1 };
-        IDomainObject<Guid> d2 = new DomainObjectImplementationGuid { Id = testValue2 };
+        var id = Guid.NewGuid();
+        var t1 = new TestEntity(id, "value");
+        var t2 = new TestEntity(id, "value");
+        Assert.NotEqual(t1, t2);
+    }
 
-        Assert.Equal(testValue1, testValue2);
-        Assert.Equal(d1, d2);
+    [Fact]
+    public void ShouldBeEqualityEqualWhenSameIdAndDifferentValue()
+    {
+        var id = Guid.NewGuid();
+        var t1 = new TestEntity(id, "value");
+        var t2 = new TestEntity(id, "value");
+        Assert.Equivalent(t1, t2);
     }
 
     [Fact]

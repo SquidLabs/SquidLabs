@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <RootNamespace>SquidLabs.Hashing</RootNamespace>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        
+
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 

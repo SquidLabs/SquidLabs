@@ -19,7 +19,8 @@ public interface IFileEntry : IDataEntry
     static virtual Task<T?> FromStreamAsync<T>(string fileName, Stream stream,
         CancellationToken cancellationToken = default) where T : class, IFileEntry
     {
-        return Task.FromResult(Activator.CreateInstance(typeof(T), new {
+        return Task.FromResult(Activator.CreateInstance(typeof(T), new
+        {
             fileName, stream
         }) as T);
     }

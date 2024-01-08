@@ -5,15 +5,16 @@ namespace SquidLabs.Tentacles.Application.Repository;
 /// <summary>
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
-/// <typeparam name="TKey"></typeparam>
-public interface IRepository<TDomainObject, TKey> where TDomainObject : class, IDomainObject<TKey>
+/// <typeparam name="TId"></typeparam>
+public interface IRepository<TDomainObject, TId> where TDomainObject : class, IDomainObject<TId>
+    where TId : IEquatable<TId>
 {
     /// <summary>
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TDomainObject?> GetAsync(TKey id, CancellationToken cancellationToken = default);
+    Task<TDomainObject?> GetAsync(TId id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// </summary>
@@ -39,5 +40,5 @@ public interface IRepository<TDomainObject, TKey> where TDomainObject : class, I
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task DeleteAsync(TKey id, CancellationToken cancellationToken = default);
+    Task DeleteAsync(TId id, CancellationToken cancellationToken = default);
 }

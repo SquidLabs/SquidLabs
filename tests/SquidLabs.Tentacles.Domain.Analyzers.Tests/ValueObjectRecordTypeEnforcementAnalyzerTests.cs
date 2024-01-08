@@ -10,9 +10,6 @@ namespace SquidLabs.Tentacles.Domain.Analyzers.Tests;
 
 public class ValueObjectRecordTypeEnforcementAnalyzerTests
 {
-    private readonly ImmutableArray<string> assemblyNames =
-        [typeof(IValueObject<>).Assembly.FullName, typeof(ValueObjectRecordTypeEnforcementAnalyzer).Assembly.FullName];
-
     private static readonly ReferenceAssemblies referenceAssemblies =
         new(
             "net8.0",
@@ -21,12 +18,15 @@ public class ValueObjectRecordTypeEnforcementAnalyzerTests
                 "8.0.0"),
             Path.Combine("ref", "net8.0"));
 
+    private readonly ImmutableArray<string> assemblyNames =
+        [typeof(IValueObject<>).Assembly.FullName, typeof(ValueObjectRecordTypeEnforcementAnalyzer).Assembly.FullName];
+
     [Fact]
     public async Task Analyzer_Should_Report_Diagnostic_For_Non_Record_Type()
     {
         const string testCode = """
 
-                                using SquidLabs.Tentacles.Domain.Objects;
+                                using SquidLabs.Tentacles.Domain.TestObjects;
 
                                 public class TestClass : IValueObject<int>
                                 {
@@ -57,10 +57,9 @@ public class ValueObjectRecordTypeEnforcementAnalyzerTests
                 AdditionalReferences = { MetadataReference.CreateFromFile(typeof(IValueObject<>).Assembly.Location) }
             },
             ReferenceAssemblies = referenceAssemblies
-                
         };
-       
-            await analyzerTest.RunAsync();
+
+        await analyzerTest.RunAsync();
     }
 
     [Fact]
@@ -68,7 +67,7 @@ public class ValueObjectRecordTypeEnforcementAnalyzerTests
     {
         const string testCode = """
 
-                                using SquidLabs.Tentacles.Domain.Objects;
+                                using SquidLabs.Tentacles.Domain.TestObjects;
 
                                 public record TestClass : IValueObject<int>
                                 {
@@ -87,7 +86,6 @@ public class ValueObjectRecordTypeEnforcementAnalyzerTests
         var analyzerTest = new CSharpAnalyzerTest<ValueObjectRecordTypeEnforcementAnalyzer, XUnitVerifier>
         {
             TestCode = testCode,
-            ExpectedDiagnostics = {  },
             TestState =
             {
                 AdditionalReferences = { MetadataReference.CreateFromFile(typeof(IValueObject<>).Assembly.Location) }
@@ -103,7 +101,7 @@ public class ValueObjectRecordTypeEnforcementAnalyzerTests
     {
         const string testCode = """
 
-                                using SquidLabs.Tentacles.Domain.Objects;
+                                using SquidLabs.Tentacles.Domain.TestObjects;
 
                                 public struct TestStruct : IValueObject<int>
                                 {
@@ -142,7 +140,7 @@ public class ValueObjectRecordTypeEnforcementAnalyzerTests
     {
         const string testCode = """
 
-                                using SquidLabs.Tentacles.Domain.Objects;
+                                using SquidLabs.Tentacles.Domain.TestObjects;
 
                                 public record TestRecord<T> : IValueObject<int>
                                 {
@@ -174,7 +172,7 @@ public class ValueObjectRecordTypeEnforcementAnalyzerTests
     {
         const string testCode = """
 
-                                using SquidLabs.Tentacles.Domain.Objects;
+                                using SquidLabs.Tentacles.Domain.TestObjects;
 
                                 public partial class TestClass : IValueObject<int>
                                 {

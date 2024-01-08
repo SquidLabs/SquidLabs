@@ -4,23 +4,46 @@ using Xunit;
 
 namespace SquidLabs.Tentacles.Domain.Tests.Objects;
 
-public class EntityTests
+public class DomainObjectImplementationGuid : IDomainObject<Guid>
+{
+    public Guid Id { get; set; }
+
+    public bool Equals(IDomainObject<Guid>? other)
+    {
+        return other is not null && Id.Equals(other.Id);
+    }
+}
+
+public class DomainObjectImplementationInt : IDomainObject<int>
+{
+    public int Id { get; set; }
+
+    public bool Equals(IDomainObject<int>? other)
+    {
+        return other is not null && Id.Equals(other.Id);
+    }
+}
+
+public class DomainObjectTests
 {
     [Fact]
-    public void ShouldNotBeEqualWithSameInnerValue()
+    public void ShouldBeEqualGuidIdWithDefaultNew()
     {
-        var t1 = new TestEntity("value");
-        var t2 = new TestEntity("value");
-        Assert.NotEqual(t1, t2);
+        IDomainObject<Guid> d1 = new DomainObjectImplementationGuid();
+        IDomainObject<Guid> d2 = new DomainObjectImplementationGuid();
+        Assert.Equal(d1, d1);
     }
 
     [Fact]
-    public void ShouldBeEqualWhenSameIdAndDifferentValue()
+    public void ShouldBeEqualGuidIdWhenBothAreInitialized()
     {
-        var id = Guid.NewGuid();
-        var t1 = new TestEntity(id, "value");
-        var t2 = new TestEntity(id, "value");
-        Assert.Equal(t1, t2);
+        var testValue1 = Guid.NewGuid();
+        var testValue2 = new Guid(testValue1.ToString());
+        IDomainObject<Guid> d1 = new DomainObjectImplementationGuid { Id = testValue1 };
+        IDomainObject<Guid> d2 = new DomainObjectImplementationGuid { Id = testValue2 };
+
+        Assert.Equal(testValue1, testValue2);
+        Assert.Equal(d1, d2);
     }
 
     [Fact]

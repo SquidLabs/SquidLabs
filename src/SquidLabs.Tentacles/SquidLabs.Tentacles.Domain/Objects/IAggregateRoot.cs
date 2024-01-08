@@ -3,11 +3,11 @@ namespace SquidLabs.Tentacles.Domain.Objects;
 /// <summary>
 ///     An inteface for DDD Aggregate Root
 /// </summary>
-/// <typeparam name="T"></typeparam>
-public interface IAggregateRoot<TKey> : IDomainObject<TKey>
+/// <typeparam name="TId"></typeparam>
+public interface IAggregateRoot<TId> : IEntity<TId> where TId : IEquatable<TId>
 {
     /// <summary>
     ///     The unique Identifier for the Aggregate
     /// </summary>
-    public TKey Id { get; set; }
+    public new TId Id { get; set; }
 }

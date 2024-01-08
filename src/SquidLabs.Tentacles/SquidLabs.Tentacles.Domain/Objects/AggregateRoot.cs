@@ -1,27 +1,32 @@
+using SquidLabs.Tentacles.Domain.Events;
+
 namespace SquidLabs.Tentacles.Domain.Objects;
 
 /// <summary>
 /// </summary>
-public class AggregateRoot : IAggregateRoot<Guid>
+public class AggregateRoot<TId> : IAggregateRoot<TId> where TId : IEquatable<TId>
 {
-    /// <summary>
-    /// </summary>
-    /// <param name="other"></param>
-    /// <returns></returns>
-    public bool Equals(IDomainObject<Guid>? other)
+    private readonly List<IDomainEvent<TId>> _domainEvents = new();
+
+    public virtual void AddDomainEvent(IDomainEvent<TId> domainEvent)
     {
-        return other is not null && GetKey() == other.GetKey();
+        _domainEvents.Add(domainEvent);
     }
 
-    /// <summary>
-    /// </summary>
-    /// <returns></returns>
-    public Guid GetKey()
+    public void RemoveDomainEvent(IDomainEvent<TId> domainEvent)
     {
-        return Id;
+        _domainEvents.Remove(domainEvent);
     }
 
-    /// <summary>
-    /// </summary>
-    public Guid Id { get; set; }
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
+    }
+
+    public TId Id { get; set; } = default!;
+
+    public bool Equals(IDomainObject<TId>? other)
+    {
+        return other is IAggregateRoot<TId> && EqualityComparer<TId>.Default.Equals(Id, other.Id);
+    }
 }

@@ -6,7 +6,7 @@
         <IsPackable>false</IsPackable>
         <RootNamespace>SquidLabs.Tentacles.Domain.Tests</RootNamespace>
         <AssemblyName>SquidLabs.Tentacles.Domain.Tests</AssemblyName>
-        
+
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
